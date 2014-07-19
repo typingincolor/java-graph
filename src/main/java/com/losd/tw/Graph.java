@@ -1,6 +1,7 @@
 package com.losd.tw;
 
 import com.losd.tw.exceptions.DuplicateRouteException;
+import com.losd.tw.exceptions.NoSuchRouteException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,6 +58,11 @@ public class Graph {
     private int distance(Town a, Town b) {
         List<Trip> trips = nodes.get(a);
         int tripIndex = trips.indexOf(new Trip(b, 0));
+
+        if (tripIndex == -1) {
+            throw new NoSuchRouteException();
+        }
+
         return trips.get(tripIndex).distance;
     }
 
