@@ -16,36 +16,15 @@ public class Graph {
     private Map<Town, List<Route>> nodes = new HashMap<Town, List<Route>>();
 
     public void addRoute(Line line) {
-        if (isExistingLine(line)) {
+        List<Route> routes = getRoutesForStartTown(line);
+
+        Route potentialRoute = new Route(line.getEndTown(), line.getDistance());
+
+        if (routes.contains(potentialRoute)) {
             throw new DuplicateRouteException();
         }
-        else {
-            addRouteToTown(line);
-        }
-    }
 
-    private boolean isExistingLine(Line line) {
-        List<Route> routes = getRoutesForStartTown(line);
-
-        if (routes.size() == 0) {
-            return false;
-        }
-
-        for (Route route : routes) {
-            if (route.town.equals(line.getEndTown())) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private void addRouteToTown(Line line) {
-        List<Route> routes = getRoutesForStartTown(line);
-
-        Route route = new Route(line.getEndTown(), line.getDistance());
-        routes.add(route);
-
+        routes.add(potentialRoute);
         nodes.put(line.getStartTown(), routes);
     }
 
@@ -64,6 +43,14 @@ public class Graph {
         public Route(Town town, int distance) {
             this.town = town;
             this.distance = distance;
+        }
+
+        public boolean equals(Object that) {
+            if (! (that instanceof Route)) return false;
+
+            Route x = (Route) that;
+
+            return this.town.equals(x.town);
         }
     }
 }
