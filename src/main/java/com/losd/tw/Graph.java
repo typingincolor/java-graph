@@ -15,7 +15,7 @@ public class Graph {
 
         if (routes != null) {
             for (Route route: routes) {
-                if (route.getNode().getId() == new Node(endNode).getId()) {
+                if (route.getNode().equals(new Node(endNode))) {
                     throw new DuplicateRouteException();
                 }
             }
