@@ -37,6 +37,10 @@ public class Graph {
     }
 
     public int distance(Route route) {
+        int totalDistance = 0;
+
+
+
         throw new RuntimeException("Unimplemented");
     }
 

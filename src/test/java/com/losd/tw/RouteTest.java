@@ -32,4 +32,26 @@ public class RouteTest {
     public void noTownRoute() {
         new Route();
     }
+
+    @Test
+    public void pop() {
+        Town A = new Town("A");
+        Town B = new Town("B");
+        Town C = new Town("C");
+
+        Route route = new Route(A, B, C);
+        Route nextRoute = route.pop();
+        assertThat(nextRoute.numberOfTowns(), is(2));
+        assertThat(nextRoute.getTowns().get(0), is(B));
+        assertThat(nextRoute.getTowns().get(1), is(C));
+    }
+
+    @Test(expected = RouteTooShortExeception.class)
+    public void endOfRoute() {
+        Town A = new Town("A");
+        Town B = new Town("B");
+
+        Route route = new Route(A, B);
+        route.pop();
+    }
 }

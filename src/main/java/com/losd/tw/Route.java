@@ -25,4 +25,15 @@ public class Route {
     public int numberOfTowns() {
         return towns.size();
     }
+
+    public Route pop() {
+        List<Town> nextRoute = new ArrayList<Town>(towns);
+        nextRoute.remove(0);
+
+        return new Route(nextRoute.toArray(new Town[nextRoute.size()]));
+    }
+
+    public List<Town> getTowns() {
+        return towns;
+    }
 }
