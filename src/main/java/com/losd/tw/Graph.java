@@ -72,13 +72,9 @@ public class Graph {
         List<Trip> trips = getTripsForStartTown(visited.getLast());
 
         for (Trip trip : trips) {
-            //if (visited.contains(trip.destination)) {
-            //    continue;
-            //}
             if (visited.size() > maxSteps) {
                 continue;
             }
-
 
             if (trip.destination.equals(end)) {
                 visited.add(trip.destination);
@@ -90,9 +86,6 @@ public class Graph {
         }
 
         for (Trip trip: trips) {
-            //if (visited.contains(trip.destination) || trip.equals(end)) {
-            //    continue;
-            //}
             if (visited.size() > maxSteps) {
                 continue;
             }
