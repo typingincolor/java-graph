@@ -37,11 +37,11 @@ public class Graph {
     }
 
     private class Trip {
-        private Town town;
+        private Town destination;
         private int distance;
 
-        public Trip(Town town, int distance) {
-            this.town = town;
+        public Trip(Town destination, int distance) {
+            this.destination = destination;
             this.distance = distance;
         }
 
@@ -50,7 +50,7 @@ public class Graph {
 
             Trip x = (Trip) that;
 
-            return this.town.equals(x.town);
+            return this.destination.equals(x.destination);
         }
     }
 }
