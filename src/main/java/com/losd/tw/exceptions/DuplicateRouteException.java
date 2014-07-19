@@ -1,4 +1,4 @@
-package com.losd.tw;
+package com.losd.tw.exceptions;
 
 /**
  * Throw when an attempt to create a duplicate route is made

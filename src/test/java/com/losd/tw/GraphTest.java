@@ -1,5 +1,7 @@
 package com.losd.tw;
 
+import com.losd.tw.exceptions.DuplicateRouteException;
+import com.losd.tw.exceptions.InvalidLineException;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

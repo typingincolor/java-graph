@@ -1,4 +1,4 @@
-package com.losd.tw;
+package com.losd.tw.exceptions;
 
 /**
  * Exception thrown when a route is invalid.

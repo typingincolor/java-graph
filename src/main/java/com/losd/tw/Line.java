@@ -1,5 +1,7 @@
 package com.losd.tw;
 
+import com.losd.tw.exceptions.InvalidLineException;
+
 /**
  * Represenation of a railway line
  *
