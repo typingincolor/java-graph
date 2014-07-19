@@ -13,42 +13,42 @@ import java.util.Map;
  * Created by andrew on 19/07/2014.
  */
 public class Graph {
-    private Map<Town, List<Route>> nodes = new HashMap<Town, List<Route>>();
+    private Map<Town, List<Trip>> nodes = new HashMap<Town, List<Trip>>();
 
     public void addRoute(Line line) {
-        List<Route> routes = getRoutesForStartTown(line);
+        List<Trip> trips = getTripsForStartTown(line.getStartTown());
 
-        Route potentialRoute = new Route(line.getEndTown(), line.getDistance());
+        Trip potentialTrip = new Trip(line.getEndTown(), line.getDistance());
 
-        if (routes.contains(potentialRoute)) {
+        if (trips.contains(potentialTrip)) {
             throw new DuplicateRouteException();
         }
 
-        routes.add(potentialRoute);
-        nodes.put(line.getStartTown(), routes);
+        trips.add(potentialTrip);
+        nodes.put(line.getStartTown(), trips);
     }
 
-    private List<Route> getRoutesForStartTown(Line line) {
-        return (nodes.get(line.getStartTown()) == null) ? new ArrayList<Route>() : nodes.get(line.getStartTown());
+    private List<Trip> getTripsForStartTown(Town town) {
+        return (nodes.get(town) == null) ? new ArrayList<Trip>() : nodes.get(town);
     }
 
     public int numberOfLinesStartingAt(Town town) {
         return nodes.get(town).size();
     }
 
-    private class Route {
+    private class Trip {
         private Town town;
         private int distance;
 
-        public Route(Town town, int distance) {
+        public Trip(Town town, int distance) {
             this.town = town;
             this.distance = distance;
         }
 
         public boolean equals(Object that) {
-            if (! (that instanceof Route)) return false;
+            if (! (that instanceof Trip)) return false;
 
-            Route x = (Route) that;
+            Trip x = (Trip) that;
 
             return this.town.equals(x.town);
         }
