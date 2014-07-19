@@ -1,7 +1,6 @@
 package com.losd.tw;
 
 import com.losd.tw.exceptions.NoSuchRouteException;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -9,6 +8,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 /**
+ * The all important ThoughtWorks test
+ *
  * Created by andrew on 19/07/2014.
  */
 public class ThoughtWorksTests {
@@ -66,6 +67,17 @@ public class ThoughtWorksTests {
     @Test(expected = NoSuchRouteException.class)
     public void test5() {
         distance(A, E, D);
+    }
+
+    @Test
+    public void test6() {
+        graph.ride(C, C, 3);
+        graph.ride(C, C, 2);
+    }
+
+    @Test
+    public void test7() {
+        graph.ride(A, C, 4);
     }
 
     private int distance(Town ... towns) {
