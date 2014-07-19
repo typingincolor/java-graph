@@ -11,6 +11,10 @@ public class Graph {
     private HashMap<Town, List<Route>> nodes = new HashMap();
 
     public void addRoute(Town startTown, Town endTown, int distance) {
+        if (startTown.equals(endTown)) {
+            throw new InvalidRouteException();
+        }
+
         List<Route> routes = nodes.get(startTown);
 
         if (routes != null) {

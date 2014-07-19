@@ -31,4 +31,13 @@ public class GraphTest {
         graph.addRoute(A, B, 5);
         graph.addRoute(A, B, 5);
     }
+
+    @Test(expected = InvalidRouteException.class)
+    public void failsForRouteFromAToA() {
+        Graph graph = new Graph();
+
+        Town A = new Town("A");
+
+        graph.addRoute(A, A, 5);
+    }
 }
