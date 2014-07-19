@@ -22,7 +22,7 @@ public class GraphTest {
 
         Line line = new Line(A, B, 5);
 
-        graph.addRoute(line);
+        graph.addTrip(line);
 
         assertThat(graph.numberOfLinesStartingAt(A), is(1));
     }
@@ -39,8 +39,8 @@ public class GraphTest {
         Line lineAC = new Line(A, C, 1);
 
 
-        graph.addRoute(lineAB);
-        graph.addRoute(lineAC);
+        graph.addTrip(lineAB);
+        graph.addTrip(lineAC);
 
         assertThat(graph.numberOfLinesStartingAt(A), is(2));
     }
@@ -57,9 +57,9 @@ public class GraphTest {
         Line lineAC = new Line(A, C, 1);
         Line lineBC = new Line(B, C, 1);
 
-        graph.addRoute(lineAB);
-        graph.addRoute(lineAC);
-        graph.addRoute(lineBC);
+        graph.addTrip(lineAB);
+        graph.addTrip(lineAC);
+        graph.addTrip(lineBC);
 
         assertThat(graph.numberOfLinesStartingAt(A), is(2));
         assertThat(graph.numberOfLinesStartingAt(B), is(1));
@@ -74,8 +74,8 @@ public class GraphTest {
 
         Line line = new Line(A, B, 5);
 
-        graph.addRoute(line);
-        graph.addRoute(line);
+        graph.addTrip(line);
+        graph.addTrip(line);
     }
 
     @Test(expected = InvalidLineException.class)
@@ -85,6 +85,6 @@ public class GraphTest {
         Town A = new Town("A");
         Line line = new Line(A, A, 5);
 
-        graph.addRoute(line);
+        graph.addTrip(line);
     }
 }

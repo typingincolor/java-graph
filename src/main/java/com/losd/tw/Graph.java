@@ -15,7 +15,7 @@ import java.util.Map;
 public class Graph {
     private Map<Town, List<Trip>> nodes = new HashMap<Town, List<Trip>>();
 
-    public void addRoute(Line line) {
+    public void addTrip(Line line) {
         List<Trip> trips = getTripsForStartTown(line.getStartTown());
 
         Trip potentialTrip = new Trip(line.getEndTown(), line.getDistance());
@@ -34,6 +34,10 @@ public class Graph {
 
     public int numberOfLinesStartingAt(Town town) {
         return nodes.get(town).size();
+    }
+
+    public int distance(Route route) {
+        throw new RuntimeException("Unimplemented");
     }
 
     private class Trip {
