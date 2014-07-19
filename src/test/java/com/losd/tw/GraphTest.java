@@ -17,4 +17,12 @@ public class GraphTest {
 
         assertThat(graph.numberOfRoutes("A"), is(1));
     }
+
+    @Test(expected = DuplicateRouteException.class)
+    public void failsForDuplicateRoute() {
+        Graph graph = new Graph();
+
+        graph.addRoute("A", "B", 5);
+        graph.addRoute("A", "B", 5);
+    }
 }
