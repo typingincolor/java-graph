@@ -8,32 +8,32 @@ import java.util.List;
  * Created by andrew on 19/07/2014.
  */
 public class Graph {
-    private HashMap<Node, List<Route>> nodes = new HashMap();
+    private HashMap<Town, List<Route>> nodes = new HashMap();
 
-    public void addRoute(Node startNode, Node endNode, int distance) {
-        List<Route> routes = nodes.get(startNode);
+    public void addRoute(Town startTown, Town endTown, int distance) {
+        List<Route> routes = nodes.get(startTown);
 
         if (routes != null) {
             for (Route route: routes) {
-                if (route.getNode().equals(endNode)) {
+                if (route.getNode().equals(endTown)) {
                     throw new DuplicateRouteException();
                 }
             }
-            Route route = new Route(endNode, distance);
+            Route route = new Route(endTown, distance);
             routes.add(route);
 
-            nodes.put(startNode, routes);
+            nodes.put(startTown, routes);
         }
         else {
             routes = new ArrayList<Route>();
-            Route route = new Route(endNode, distance);
+            Route route = new Route(endTown, distance);
             routes.add(route);
 
-            nodes.put(startNode, routes);
+            nodes.put(startTown, routes);
         }
     }
 
-    public int numberOfRoutes(Node node) {
-        return nodes.get(node).size();
+    public int numberOfRoutes(Town town) {
+        return nodes.get(town).size();
     }
 }

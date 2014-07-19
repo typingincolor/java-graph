@@ -4,15 +4,15 @@ package com.losd.tw;
  * Created by andrew on 19/07/2014.
  */
 public class Route {
-    private Node node;
+    private Town node;
     private int distance;
 
-    public Route(Node node, int distance) {
+    public Route(Town node, int distance) {
         this.node = node;
         this.distance = distance;
     }
 
-    public Node getNode() {
+    public Town getNode() {
         return node;
     }
 

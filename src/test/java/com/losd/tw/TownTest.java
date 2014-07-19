@@ -8,11 +8,11 @@ import static org.hamcrest.Matchers.*;
 /**
  * Created by andrew on 19/07/2014.
  */
-public class NodeTest {
+public class TownTest {
     @Test
     public void equal() {
-        Node A = new Node("A");
-        Node B = new Node("A");
+        Town A = new Town("A");
+        Town B = new Town("A");
 
         assertThat(A.equals(A), is(true));
         assertThat(A.equals(B), is(true));
@@ -21,8 +21,8 @@ public class NodeTest {
 
     @Test
     public void notEquals() {
-        Node A = new Node("A");
-        Node B = new Node("B");
+        Town A = new Town("A");
+        Town B = new Town("B");
 
         assertThat(A.equals(B), is(false));
         assertThat(B.equals(A), is(false));

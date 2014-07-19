@@ -3,14 +3,14 @@ package com.losd.tw;
 /**
  * Created by andrew on 19/07/2014.
  */
-public class Node {
+public class Town {
     private String id;
 
-    public Node(String id) {
+    public Town(String id) {
         this.id = id;
     }
 
-    public boolean equals(Node o) {
+    public boolean equals(Town o) {
         return this.id == o.id;
     }
 }

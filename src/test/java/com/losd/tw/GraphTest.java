@@ -13,8 +13,8 @@ public class GraphTest {
     public void addRoute() {
         Graph graph = new Graph();
 
-        Node A = new Node("A");
-        Node B = new Node("B");
+        Town A = new Town("A");
+        Town B = new Town("B");
 
         graph.addRoute(A, B, 5);
 
@@ -25,8 +25,8 @@ public class GraphTest {
     public void failsForDuplicateRoute() {
         Graph graph = new Graph();
 
-        Node A = new Node("A");
-        Node B = new Node("B");
+        Town A = new Town("A");
+        Town B = new Town("B");
 
         graph.addRoute(A, B, 5);
         graph.addRoute(A, B, 5);
