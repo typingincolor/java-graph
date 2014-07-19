@@ -24,7 +24,7 @@ public class GraphTest {
 
         graph.addRoute(line);
 
-        assertThat(graph.numberOfRoutes(A), is(1));
+        assertThat(graph.numberOfLinesStartingAt(A), is(1));
     }
 
     @Test(expected = DuplicateRouteException.class)
