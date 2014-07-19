@@ -2,6 +2,8 @@ package com.losd.tw;
 
 /**
  * Represenation of a railway line
+ *
+ * Created by andrew on 19/07/2014.
  */
 public class Line {
     private Town startTown;
