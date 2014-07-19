@@ -13,16 +13,22 @@ public class GraphTest {
     public void addRoute() {
         Graph graph = new Graph();
 
-        graph.addRoute("A", "B", 5);
+        Node A = new Node("A");
+        Node B = new Node("B");
 
-        assertThat(graph.numberOfRoutes("A"), is(1));
+        graph.addRoute(A, B, 5);
+
+        assertThat(graph.numberOfRoutes(A), is(1));
     }
 
     @Test(expected = DuplicateRouteException.class)
     public void failsForDuplicateRoute() {
         Graph graph = new Graph();
 
-        graph.addRoute("A", "B", 5);
-        graph.addRoute("A", "B", 5);
+        Node A = new Node("A");
+        Node B = new Node("B");
+
+        graph.addRoute(A, B, 5);
+        graph.addRoute(A, B, 5);
     }
 }
