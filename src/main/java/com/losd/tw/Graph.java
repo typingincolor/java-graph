@@ -20,7 +20,7 @@ public class Graph {
 
         if (routes != null) {
             for (Route route : routes) {
-                if (route.getNode().equals(line.getEndTown())) {
+                if (route.town.equals(line.getEndTown())) {
                     throw new DuplicateRouteException();
                 }
             }
@@ -39,5 +39,15 @@ public class Graph {
 
     public int numberOfRoutes(Town town) {
         return nodes.get(town).size();
+    }
+
+    private class Route {
+        private Town town;
+        private int distance;
+
+        public Route(Town town, int distance) {
+            this.town = town;
+            this.distance = distance;
+        }
     }
 }
