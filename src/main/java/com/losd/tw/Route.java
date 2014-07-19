@@ -12,11 +12,11 @@ public class Route {
         this.distance = distance;
     }
 
-    private Node getNode() {
+    public Node getNode() {
         return node;
     }
 
-    private int getDistance() {
+    public int getDistance() {
         return distance;
     }
 }

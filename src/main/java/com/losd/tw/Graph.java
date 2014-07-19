@@ -11,12 +11,26 @@ public class Graph {
     private HashMap<String, List<Route>> nodes = new HashMap();
 
     public void addRoute(String startNode, String endNode, int distance) {
-         List<Route> routes = new ArrayList<Route>();
+        List<Route> routes = nodes.get(startNode);
 
-        Route route = new Route(new Node(endNode), distance);
-        routes.add(route);
+        if (routes != null) {
+            for (Route route: routes) {
+                if (route.getNode().getId() == new Node(endNode).getId()) {
+                    throw new DuplicateRouteException();
+                }
+            }
+            Route route = new Route(new Node(endNode), distance);
+            routes.add(route);
 
-        nodes.put(startNode, routes);
+            nodes.put(startNode, routes);
+        }
+        else {
+            routes = new ArrayList<Route>();
+            Route route = new Route(new Node(endNode), distance);
+            routes.add(route);
+
+            nodes.put(startNode, routes);
+        }
     }
 
     public int numberOfRoutes(String node) {
