@@ -10,11 +10,11 @@ import static org.hamcrest.Matchers.*;
  */
 public class GraphTest {
     @Test
-    public void addEdge() {
+    public void addRoute() {
         Graph graph = new Graph();
 
-        graph.addEdge("A", "B", 5);
+        graph.addRoute("A", "B", 5);
 
-        assertThat(graph.numberOfEdges("A"), is(1));
+        assertThat(graph.numberOfRoutes("A"), is(1));
     }
 }

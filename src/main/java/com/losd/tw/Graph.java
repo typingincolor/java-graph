@@ -8,18 +8,18 @@ import java.util.List;
  * Created by andrew on 19/07/2014.
  */
 public class Graph {
-    private HashMap<String, List<Edge>> nodes = new HashMap();
+    private HashMap<String, List<Route>> nodes = new HashMap();
 
-    public void addEdge(String startNode, String endNode, int distance) {
-         List<Edge> edges = new ArrayList<Edge>();
+    public void addRoute(String startNode, String endNode, int distance) {
+         List<Route> routes = new ArrayList<Route>();
 
-        Edge edge = new Edge(new Node(endNode), distance);
-        edges.add(edge);
+        Route route = new Route(new Node(endNode), distance);
+        routes.add(route);
 
-        nodes.put(startNode, edges);
+        nodes.put(startNode, routes);
     }
 
-    public int numberOfEdges(String node) {
+    public int numberOfRoutes(String node) {
         return nodes.get(node).size();
     }
 }
