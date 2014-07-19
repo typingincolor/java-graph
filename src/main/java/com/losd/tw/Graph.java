@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Representation of railroad map
+ *
  * Created by andrew on 19/07/2014.
  */
 public class Graph {

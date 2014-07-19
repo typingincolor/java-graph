@@ -1,6 +1,8 @@
 package com.losd.tw;
 
 /**
+ * Representation of a Route between Towns
+ *
  * Created by andrew on 19/07/2014.
  */
 public class Route {

@@ -1,6 +1,8 @@
 package com.losd.tw;
 
 /**
+ * Representation of a Town
+ *
  * Created by andrew on 19/07/2014.
  */
 public class Town {
@@ -11,6 +13,6 @@ public class Town {
     }
 
     public boolean equals(Town o) {
-        return this.id == o.id;
+        return this.id.equals(o.id);
     }
 }
