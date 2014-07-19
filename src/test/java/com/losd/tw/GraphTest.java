@@ -27,6 +27,44 @@ public class GraphTest {
         assertThat(graph.numberOfLinesStartingAt(A), is(1));
     }
 
+    @Test
+    public void addTwoRoutes() {
+        Graph graph = new Graph();
+
+        Town A = new Town("A");
+        Town B = new Town("B");
+        Town C = new Town("C");
+
+        Line lineAB = new Line(A, B, 5);
+        Line lineAC = new Line(A, C, 1);
+
+
+        graph.addRoute(lineAB);
+        graph.addRoute(lineAC);
+
+        assertThat(graph.numberOfLinesStartingAt(A), is(2));
+    }
+
+    @Test
+    public void triangle() {
+        Graph graph = new Graph();
+
+        Town A = new Town("A");
+        Town B = new Town("B");
+        Town C = new Town("C");
+
+        Line lineAB = new Line(A, B, 5);
+        Line lineAC = new Line(A, C, 1);
+        Line lineBC = new Line(B, C, 1);
+
+        graph.addRoute(lineAB);
+        graph.addRoute(lineAC);
+        graph.addRoute(lineBC);
+
+        assertThat(graph.numberOfLinesStartingAt(A), is(2));
+        assertThat(graph.numberOfLinesStartingAt(B), is(1));
+    }
+
     @Test(expected = DuplicateRouteException.class)
     public void failsForDuplicateRoute() {
         Graph graph = new Graph();
