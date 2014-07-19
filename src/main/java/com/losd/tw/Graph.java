@@ -3,12 +3,13 @@ package com.losd.tw;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by andrew on 19/07/2014.
  */
 public class Graph {
-    private HashMap<Town, List<Route>> nodes = new HashMap();
+    private Map<Town, List<Route>> nodes = new HashMap<Town, List<Route>>();
 
     public void addRoute(Town startTown, Town endTown, int distance) {
         if (startTown.equals(endTown)) {
