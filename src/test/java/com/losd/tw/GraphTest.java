@@ -16,7 +16,9 @@ public class GraphTest {
         Town A = new Town("A");
         Town B = new Town("B");
 
-        graph.addRoute(A, B, 5);
+        Line line = new Line(A, B, 5);
+
+        graph.addRoute(line);
 
         assertThat(graph.numberOfRoutes(A), is(1));
     }
@@ -28,8 +30,10 @@ public class GraphTest {
         Town A = new Town("A");
         Town B = new Town("B");
 
-        graph.addRoute(A, B, 5);
-        graph.addRoute(A, B, 5);
+        Line line = new Line(A, B, 5);
+
+        graph.addRoute(line);
+        graph.addRoute(line);
     }
 
     @Test(expected = InvalidRouteException.class)
@@ -37,7 +41,8 @@ public class GraphTest {
         Graph graph = new Graph();
 
         Town A = new Town("A");
+        Line line = new Line(A, A, 5);
 
-        graph.addRoute(A, A, 5);
+        graph.addRoute(line);
     }
 }

@@ -13,30 +13,25 @@ import java.util.Map;
 public class Graph {
     private Map<Town, List<Route>> nodes = new HashMap<Town, List<Route>>();
 
-    public void addRoute(Town startTown, Town endTown, int distance) {
-        if (startTown.equals(endTown)) {
-            throw new InvalidRouteException();
-        }
-
-        List<Route> routes = nodes.get(startTown);
+    public void addRoute(Line line) {
+        List<Route> routes = nodes.get(line.getStartTown());
 
         if (routes != null) {
-            for (Route route: routes) {
-                if (route.getNode().equals(endTown)) {
+            for (Route route : routes) {
+                if (route.getNode().equals(line.getEndTown())) {
                     throw new DuplicateRouteException();
                 }
             }
-            Route route = new Route(endTown, distance);
+            Route route = new Route(line.getEndTown(), line.getDistance());
             routes.add(route);
 
-            nodes.put(startTown, routes);
-        }
-        else {
+            nodes.put(line.getStartTown(), routes);
+        } else {
             routes = new ArrayList<Route>();
-            Route route = new Route(endTown, distance);
+            Route route = new Route(line.getEndTown(), line.getDistance());
             routes.add(route);
 
-            nodes.put(startTown, routes);
+            nodes.put(line.getStartTown(), routes);
         }
     }
 
