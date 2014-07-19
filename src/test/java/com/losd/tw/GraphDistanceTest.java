@@ -12,7 +12,6 @@ import static org.hamcrest.core.Is.is;
  * Created by andrew on 19/07/2014.
  */
 public class GraphDistanceTest {
-    @Ignore("not ready yet")
     @Test
     public void simpleRoute() {
         Town A = new Town("A");

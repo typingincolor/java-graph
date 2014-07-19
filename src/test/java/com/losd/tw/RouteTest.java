@@ -20,6 +20,8 @@ public class RouteTest {
         Route route = new Route(A, B);
 
         assertThat(route.numberOfTowns(), is(2));
+        assertThat(route.getStart(), is(A));
+        assertThat(route.getFirstDestination(), is(B));
     }
 
     @Test(expected = RouteTooShortExeception.class)
@@ -44,6 +46,8 @@ public class RouteTest {
         assertThat(nextRoute.numberOfTowns(), is(2));
         assertThat(nextRoute.getTowns().get(0), is(B));
         assertThat(nextRoute.getTowns().get(1), is(C));
+        assertThat(nextRoute.getStart(), is(B));
+        assertThat(nextRoute.getFirstDestination(), is(C));
     }
 
     @Test(expected = RouteTooShortExeception.class)

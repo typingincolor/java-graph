@@ -41,7 +41,8 @@ public class Graph {
 
 
 
-        throw new RuntimeException("Unimplemented");
+
+        return totalDistance;
     }
 
     private class Trip {

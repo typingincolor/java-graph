@@ -12,7 +12,7 @@ import java.util.List;
  * Created by andrew on 19/07/2014.
  */
 public class Route {
-    private List towns = new ArrayList<Town>();
+    private List<Town> towns = new ArrayList<Town>();
 
     public Route(Town ... towns) {
         if (towns.length < 2) {
@@ -35,5 +35,13 @@ public class Route {
 
     public List<Town> getTowns() {
         return towns;
+    }
+
+    public Town getStart() {
+        return towns.get(0);
+    }
+
+    public Town getFirstDestination() {
+        return towns.get(1);
     }
 }
