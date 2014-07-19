@@ -24,7 +24,7 @@ public class Line {
 
     public Line(Town startTown, Town endTown, int distance) {
         if (startTown.equals(endTown)) {
-            throw new InvalidRouteException();
+            throw new InvalidLineException();
         }
 
         this.startTown = startTown;

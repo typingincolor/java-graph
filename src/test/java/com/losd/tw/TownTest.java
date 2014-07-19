@@ -6,6 +6,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 /**
+ * Town Tests
+ *
  * Created by andrew on 19/07/2014.
  */
 public class TownTest {
