@@ -30,7 +30,7 @@ public class Route {
         List<Town> nextRoute = new ArrayList<Town>(towns);
         nextRoute.remove(0);
 
-        return new Route(nextRoute.toArray(new Town[nextRoute.size()]));
+        return nextRoute.size() < 2 ? null : new Route(nextRoute.toArray(new Town[nextRoute.size()]));
     }
 
     public List<Town> getTowns() {

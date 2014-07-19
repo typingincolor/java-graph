@@ -15,4 +15,8 @@ public class Town {
     public boolean equals(Town o) {
         return this.id.equals(o.id);
     }
+
+    public String toString() {
+        return id;
+    }
 }

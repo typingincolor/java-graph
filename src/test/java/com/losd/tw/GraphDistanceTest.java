@@ -25,4 +25,21 @@ public class GraphDistanceTest {
 
         assertThat(graph.distance(route), is(5));
     }
+
+    @Test
+    public void moreComplicatedRoute() {
+        Town A = new Town("A");
+        Town B = new Town("B");
+        Town C = new Town("C");
+
+        Route route = new Route(A, B, C);
+
+        Graph graph = new Graph();
+        Line lineAB = new Line(A, B, 5);
+        Line lineBC = new Line(B, C, 6);
+        graph.addTrip(lineAB);
+        graph.addTrip(lineBC);
+
+        assertThat(graph.distance(route), is(11));
+    }
 }

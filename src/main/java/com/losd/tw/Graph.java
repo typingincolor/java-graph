@@ -28,21 +28,36 @@ public class Graph {
         nodes.put(line.getStartTown(), trips);
     }
 
-    private List<Trip> getTripsForStartTown(Town town) {
-        return (nodes.get(town) == null) ? new ArrayList<Trip>() : nodes.get(town);
-    }
-
     public int numberOfLinesStartingAt(Town town) {
         return nodes.get(town).size();
     }
 
     public int distance(Route route) {
-        int totalDistance = 0;
+        return calculateTotalDistance(route, 0);
+    }
 
 
+    private List<Trip> getTripsForStartTown(Town town) {
+        return (nodes.get(town) == null) ? new ArrayList<Trip>() : nodes.get(town);
+    }
 
+    private int calculateTotalDistance(Route route, int totalDistance) {
+        if (route == null) {
+            return totalDistance;
+        }
 
-        return totalDistance;
+        Town start = route.getStart();
+        Town destination = route.getFirstDestination();
+
+        totalDistance+=distance(start, destination);
+
+        return calculateTotalDistance(route.pop(), totalDistance);
+    }
+
+    private int distance(Town a, Town b) {
+        List<Trip> trips = nodes.get(a);
+        int tripIndex = trips.indexOf(new Trip(b, 0));
+        return trips.get(tripIndex).distance;
     }
 
     private class Trip {

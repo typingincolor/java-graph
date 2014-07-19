@@ -3,6 +3,7 @@ package com.losd.tw;
 import com.losd.tw.exceptions.RouteTooShortExeception;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -50,12 +51,12 @@ public class RouteTest {
         assertThat(nextRoute.getFirstDestination(), is(C));
     }
 
-    @Test(expected = RouteTooShortExeception.class)
+    @Test
     public void endOfRoute() {
         Town A = new Town("A");
         Town B = new Town("B");
 
         Route route = new Route(A, B);
-        route.pop();
+        assertThat(route.pop(), is(nullValue()));
     }
 }
