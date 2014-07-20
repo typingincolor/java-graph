@@ -61,8 +61,17 @@ public class Graph {
         return routes;
     }
 
+    public Set<Route> searchForRoutesWithLessThanXStops(Town start, Town end, int numberOfStops) {
+        Set<Route> result = new HashSet<Route>();
+        for (int i = 2; i <= numberOfStops; i++) {
+            result.addAll(searchByNumberOfStops(start, end, i));
+        }
+
+        return result;
+    }
+
     /**
-     * Returns the number of routes between start and end that have a length less than or equal to the distance specified
+     * Returns the number of routes between start and end that have a length less than the distance specified
      *
      * @param start start Town
      * @param end end Town
@@ -70,9 +79,9 @@ public class Graph {
      * @return Set of matching routes
      * @throws com.losd.tw.exceptions.NoSuchRouteException if no route can be found between the start and end points
      */
-    public Set<Route> searchByMaximumDistance(Town start, Town end, int maxDistance) {
+    public Set<Route> searchForLessThanDistance(Town start, Town end, int maxDistance) {
         VisitedTowns visited = new VisitedTowns(start);
-        Set<Route> routes = searchRestrictedByMaximumDistance(visited, end, maxDistance);
+        Set<Route> routes = searchRestrictedByMaximumDistance(visited, end, maxDistance - 1);
 
         if (routes.size() == 0) {
             throw new NoSuchRouteException();

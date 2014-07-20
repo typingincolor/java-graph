@@ -55,6 +55,18 @@ public class ThoughtWorksTests extends UnitTest {
     }
 
     @Test
+    public void test6a() {
+        Set<Route> result = graph.searchForRoutesWithLessThanXStops(C, C, 3);
+
+        Route expectedRoute1 = new Route(C, D, C);
+        Route expectedRoute2 = new Route(C, E, B, C);
+
+        assertThat(result.size(), is(2));
+        assertThat(result, hasItem(expectedRoute1));
+        assertThat(result, hasItem(expectedRoute2));
+    }
+
+    @Test
     public void test7() {
         Set<Route> result = graph.searchByNumberOfStops(A, C, 4);
 
@@ -86,7 +98,7 @@ public class ThoughtWorksTests extends UnitTest {
 
     @Test
     public void test10() {
-        Set<Route> result = graph.searchByMaximumDistance(C, C, 29);
+        Set<Route> result = graph.searchForLessThanDistance(C, C, 30);
 
         Route expectedRoute1 = new Route(C, D, C);
         Route expectedRoute2 = new Route(C, E, B, C);

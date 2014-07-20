@@ -19,7 +19,7 @@ public class MaximumDistanceTest extends UnitTest {
     public void simple() {
         Graph graph = GraphBuilder.build("AB5, BC6, AC1, CD1, BD4, AD7");
 
-        Set<Route> routes = graph.searchByMaximumDistance(A, D, 7);
+        Set<Route> routes = graph.searchForLessThanDistance(A, D, 8);
 
         Route expectedRoute1 = new Route(A, C, D);
         Route expectedRoute2 = new Route(A, D);
@@ -32,6 +32,6 @@ public class MaximumDistanceTest extends UnitTest {
     @Test(expected = NoSuchRouteException.class)
     public void noRoute() {
         Graph graph = GraphBuilder.build("AB5, BC6, AC1, CD1, BD4, AD7");
-        graph.searchByMaximumDistance(A, E, 9);
+        graph.searchForLessThanDistance(A, E, 9);
     }
 }

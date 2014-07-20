@@ -40,12 +40,11 @@ public class Application {
             System.out.println(String.format("Output #3: %s", graph.distance(new Route(A, D, C))));
             System.out.println(String.format("Output #4: %s", graph.distance(new Route(A, E, B, C, D))));
             System.out.println(String.format("Output #5: %s", graph.distance(new Route(A, E, D))));
-            System.out.println(String.format("Output #6: %s", graph.distance(new Route(A, E, D))));
+            System.out.println(String.format("Output #6: %s", graph.searchForRoutesWithLessThanXStops(C, C, 3).size()));
             System.out.println(String.format("Output #7: %s", graph.searchByNumberOfStops(A, C, 4).size()));
             System.out.println(String.format("Output #8: %s", graph.distance(graph.getShortestRouteBetween(A, C))));
             System.out.println(String.format("Output #9: %s", graph.distance(graph.getShortestRouteBetween(B, B))));
-            System.out.println(String.format("Output #10: %s", graph.searchByMaximumDistance(C, C, 29).size()));
-
+            System.out.println(String.format("Output #10: %s", graph.searchForLessThanDistance(C, C, 29).size()));
 
         } catch (IOException e) {
             System.err.println("There was a problem reading graph.txt");
