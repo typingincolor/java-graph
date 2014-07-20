@@ -227,15 +227,6 @@ public class Graph {
         private LinkedList<Trip> visited = new LinkedList<Trip>();
         private int distanceTravelled = 0;
 
-        public boolean contains(Town t) {
-            for (Trip trip : visited) {
-                if (trip.destination.equals(t)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public VisitedTowns(Town start) {
             visited.addLast(new Trip(start, 0));
         }
