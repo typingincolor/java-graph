@@ -14,48 +14,41 @@ public class Graph {
     private HashMap<Town, List<Trip>> nodes = new HashMap<Town, List<Trip>>();
     private int shortestRoute = Integer.MAX_VALUE;
 
-    public void addTrip(Line line) {
-        List<Trip> trips = getTripsForStartTown(line.getStartTown());
-
-        Trip potentialTrip = new Trip(line.getEndTown(), line.getDistance());
-
-        if (trips.contains(potentialTrip)) {
-            throw new DuplicateRouteException();
-        }
-
-        trips.add(potentialTrip);
-        nodes.put(line.getStartTown(), trips);
-    }
-
+    /**
+     * Returns the number of possible trips starting at a tow
+     *
+     * @param town starting point
+     * @return the number of possible trips
+     */
     public int numberOfTripsStartingAt(Town town) {
         List<Trip> trips = nodes.get(town);
         return trips == null ? 0 : trips.size();
     }
 
+    /**
+     * Calculate the distance covered by a route
+     *
+     * @param route a route
+     * @return the distance
+     * @throws com.losd.tw.exceptions.NoSuchRouteException if part of the route is not valid
+     */
     public int distance(Route route) {
         return calculateTotalDistance(route, 0);
     }
 
-    private List<Trip> getTripsForStartTown(Town town) {
-        return (nodes.get(town) == null) ? new LinkedList<Trip>() : nodes.get(town);
-    }
-
-    private int calculateTotalDistance(Route route, int totalDistance) {
-        if (route == null) {
-            return totalDistance;
-        }
-
-        Town start = route.getStart();
-        Town destination = route.getFirstDestination();
-
-        totalDistance += distance(start, destination);
-
-        return calculateTotalDistance(route.pop(), totalDistance);
-    }
-
+    /**
+     * Returns the number of routes between start and end that has the specified number of
+     * stops
+     *
+     * @param start start Town
+     * @param end end Town
+     * @param numberOfStops number of stops
+     * @return Set of matching routes
+     * @throws com.losd.tw.exceptions.NoSuchRouteException if no route can be found between the start and end points
+     */
     public Set<Route> searchByNumberOfStops(Town start, Town end, int numberOfStops) {
         VisitedTowns visited = new VisitedTowns(start);
-        Set<Route> routes =  searchRestrictedByNumberOfStops(visited, end, numberOfStops);
+        Set<Route> routes = searchRestrictedByNumberOfStops(visited, end, numberOfStops);
 
         if (routes.size() == 0) {
             throw new NoSuchRouteException();
@@ -64,6 +57,15 @@ public class Graph {
         return routes;
     }
 
+    /**
+     * Returns the number of routes between start and end that have a length less than or equal to the distance specified
+     *
+     * @param start start Town
+     * @param end end Town
+     * @param maxDistance maximum distance for a route
+     * @return Set of matching routes
+     * @throws com.losd.tw.exceptions.NoSuchRouteException if no route can be found between the start and end points
+     */
     public Set<Route> searchByMaximumDistance(Town start, Town end, int maxDistance) {
         VisitedTowns visited = new VisitedTowns(start);
         Set<Route> routes = searchRestrictedByMaximumDistance(visited, end, maxDistance);
@@ -75,6 +77,14 @@ public class Graph {
         return routes;
     }
 
+    /**
+     * Returns the shortest route between two towns
+     *
+     * @param start start Town
+     * @param end end Town
+     * @return the shortest route between start and end
+     * @throws com.losd.tw.exceptions.NoSuchRouteException if no route can be found between the start and end points
+     */
     public Route getShortestRouteBetween(Town start, Town end) {
         VisitedTowns visited = new VisitedTowns(start);
         shortestRoute = 30;
@@ -96,6 +106,41 @@ public class Graph {
         }
 
         return result;
+    }
+
+    /**
+     * Add a trip to the graph
+     *
+     * @param line the line to be added
+     */
+    public void addTrip(Line line) {
+        List<Trip> trips = getTripsForStartTown(line.getStartTown());
+
+        Trip potentialTrip = new Trip(line.getEndTown(), line.getDistance());
+
+        if (trips.contains(potentialTrip)) {
+            throw new DuplicateRouteException();
+        }
+
+        trips.add(potentialTrip);
+        nodes.put(line.getStartTown(), trips);
+    }
+
+    private List<Trip> getTripsForStartTown(Town town) {
+        return (nodes.get(town) == null) ? new LinkedList<Trip>() : nodes.get(town);
+    }
+
+    private int calculateTotalDistance(Route route, int totalDistance) {
+        if (route == null) {
+            return totalDistance;
+        }
+
+        Town start = route.getStart();
+        Town destination = route.getFirstDestination();
+
+        totalDistance += distance(start, destination);
+
+        return calculateTotalDistance(route.pop(), totalDistance);
     }
 
     private int distance(Town a, Town b) {

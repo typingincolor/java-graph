@@ -14,6 +14,13 @@ import java.util.List;
 public class Route {
     private List<Town> towns = new ArrayList<Town>();
 
+    /**
+     * Create a route
+     *
+     * @param towns variable list of towns
+     *
+     * @throws com.losd.tw.exceptions.RouteTooShortExeception thrown if an attempt is made to route from A to A directly.
+     */
     public Route(Town... towns) {
         if (towns.length < 2) {
             throw new RouteTooShortExeception();

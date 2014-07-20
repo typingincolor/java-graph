@@ -8,6 +8,16 @@ import java.util.StringTokenizer;
  * Created by andrew on 20/07/2014.
  */
 public abstract class GraphBuilder {
+    /**
+     * Builds a graph
+     * <p/>
+     * Towns are single characters. A route from A to B is represented by ABx where x is an integer. Routes are separated by commas.
+     *
+     * @param graph string representation of a graph
+     * @return the graph
+     * @throws com.losd.tw.exceptions.DuplicateRouteException thrown if a line already exists
+     * @throws com.losd.tw.exceptions.InvalidLineException    thrown if a line tries to go from A to A
+     */
     public static Graph build(String graph) {
 
         StringTokenizer st = new StringTokenizer(graph.replace(" ", ""), ",", false);
