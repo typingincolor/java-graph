@@ -53,4 +53,22 @@ public class Route {
         }
         return result.toString();
     }
+
+    public boolean equals(Object that) {
+        if (!(that instanceof Route)) {
+            return false;
+        }
+
+        if (towns.size() != ((Route) that).towns.size()) {
+            return false;
+        }
+
+        for (int i=0; i < towns.size(); i++) {
+            if (!towns.get(i).equals(((Route) that).towns.get(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

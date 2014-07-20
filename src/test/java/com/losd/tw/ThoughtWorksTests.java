@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -75,13 +76,27 @@ public class ThoughtWorksTests {
     public void test6() {
         List<Route> result = graph.search(C, C, 3);
         result.addAll(graph.search(C, C, 2));
+
+        Route expectedRoute1 = new Route(C, D, C);
+        Route expectedRoute2 = new Route(C, E, B, C);
+
         assertThat(result.size(), is(2));
+        assertThat(result, hasItem(expectedRoute1));
+        assertThat(result, hasItem(expectedRoute2));
     }
 
     @Test
     public void test7() {
         List<Route> result = graph.search(A, C, 4);
+
+        Route expectedRoute1 = new Route(A, B, C, D, C);
+        Route expectedRoute2 = new Route(A, D, C, D, C);
+        Route expectedRoute3 = new Route(A, D, E, B, C);
+
         assertThat(result.size(), is(3));
+        assertThat(result, hasItem(expectedRoute1));
+        assertThat(result, hasItem(expectedRoute2));
+        assertThat(result, hasItem(expectedRoute3));
     }
 
     @Test
@@ -96,5 +111,4 @@ public class ThoughtWorksTests {
         Route testRoute = new Route(towns);
         return graph.distance(testRoute);
     }
-
 }
