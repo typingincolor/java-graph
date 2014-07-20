@@ -13,8 +13,8 @@ import static org.hamcrest.Matchers.*;
 public class TownTest {
     @Test
     public void equal() {
-        Town A = Town.getInstance("A");
-        Town B = Town.getInstance("A");
+        Town A = new Town("A");
+        Town B = new Town("A");
 
         assertThat(A.equals(A), is(true));
         assertThat(A.equals(B), is(true));
@@ -23,8 +23,8 @@ public class TownTest {
 
     @Test
     public void notEquals() {
-        Town A = Town.getInstance("A");
-        Town B = Town.getInstance("B");
+        Town A = new Town("A");
+        Town B = new Town("B");
 
         assertThat(A.equals(B), is(false));
         assertThat(B.equals(A), is(false));

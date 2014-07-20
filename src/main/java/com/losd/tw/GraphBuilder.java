@@ -15,8 +15,8 @@ public abstract class GraphBuilder {
         Graph newGraph = new Graph();
         while (st.hasMoreTokens()) {
             String token = st.nextToken();
-            Town a = Town.getInstance(Character.toString(token.charAt(0)));
-            Town b = Town.getInstance(Character.toString(token.charAt(1)));
+            Town a = new Town(Character.toString(token.charAt(0)));
+            Town b = new Town(Character.toString(token.charAt(1)));
             int distance = Integer.parseInt(token.substring(2));
 
             Line line = new Line(a, b, distance);

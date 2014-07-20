@@ -11,10 +11,10 @@ import java.util.*;
  * Created by andrew on 19/07/2014.
  */
 public class Graph {
-    private Map<Town, List<Trip>> nodes = new HashMap<Town, List<Trip>>();
+    private HashMap<Town, Set<Trip>> nodes = new HashMap<Town, Set<Trip>>();
 
     public void addTrip(Line line) {
-        List<Trip> trips = getTripsForStartTown(line.getStartTown());
+        Set<Trip> trips = getTripsForStartTown(line.getStartTown());
 
         Trip potentialTrip = new Trip(line.getEndTown(), line.getDistance());
 
@@ -34,8 +34,8 @@ public class Graph {
         return calculateTotalDistance(route, 0);
     }
 
-    private List<Trip> getTripsForStartTown(Town town) {
-        return (nodes.get(town) == null) ? new ArrayList<Trip>() : nodes.get(town);
+    private Set<Trip> getTripsForStartTown(Town town) {
+        return (nodes.get(town) == null) ? new HashSet<Trip>() : nodes.get(town);
     }
 
     private int calculateTotalDistance(Route route, int totalDistance) {
@@ -62,7 +62,7 @@ public class Graph {
     }
 
     private int distance(Town a, Town b) {
-        List<Trip> trips = nodes.get(a);
+        List<Trip> trips = new ArrayList<Trip>(nodes.get(a));
         int tripIndex = trips.indexOf(new Trip(b, 0));
 
         if (tripIndex == -1) {
@@ -74,7 +74,7 @@ public class Graph {
 
     private HashSet<Route> go(VisitedTowns visited, Town end, int maxSteps) {
         HashSet<Route> result = new HashSet<Route>();
-        List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
+        Set<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
         for (Trip trip : trips) {
             if (visited.size() > maxSteps) {
@@ -107,7 +107,7 @@ public class Graph {
 
     private HashSet<Route> god(VisitedTowns visited, Town end, int maxDistance) {
         HashSet<Route> result = new HashSet<Route>();
-        List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
+        Set<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
         for (Trip trip : trips) {
             if (visited.distanceTravelled > maxDistance) {
@@ -153,6 +153,11 @@ public class Graph {
             Trip x = (Trip) that;
 
             return this.destination.equals(x.destination);
+        }
+
+        @Override
+        public int hashCode() {
+            return destination.hashCode();
         }
     }
 

@@ -19,11 +19,11 @@ import static org.hamcrest.core.Is.is;
 public class ThoughtWorksTests {
     Graph graph = GraphBuilder.build("AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7");
 
-    Town A = Town.getInstance("A");
-    Town B = Town.getInstance("B");
-    Town C = Town.getInstance("C");
-    Town D = Town.getInstance("D");
-    Town E = Town.getInstance("E");
+    Town A = new Town("A");
+    Town B = new Town("B");
+    Town C = new Town("C");
+    Town D = new Town("D");
+    Town E = new Town("E");
 
     @Test
     public void test1() {

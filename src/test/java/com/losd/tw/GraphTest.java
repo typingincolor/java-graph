@@ -13,9 +13,9 @@ import static org.hamcrest.Matchers.*;
  * Created by andrew on 19/07/2014.
  */
 public class GraphTest {
-    Town A = Town.getInstance("A");
-    Town B = Town.getInstance("B");
-    Town C = Town.getInstance("C");
+    Town A = new Town("A");
+    Town B = new Town("B");
+    Town C = new Town("C");
 
     @Test
     public void addRoute() {
