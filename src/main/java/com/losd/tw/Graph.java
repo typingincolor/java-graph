@@ -51,7 +51,7 @@ public class Graph {
         return calculateTotalDistance(route.pop(), totalDistance);
     }
 
-    public List<Route> search(Town start, Town end, int maxSteps) {
+    public List<Route> searchByMaximumSteps(Town start, Town end, int maxSteps) {
         VisitedTowns visited = new VisitedTowns(start);
         return go(visited, end, maxSteps);
     }

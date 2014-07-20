@@ -1,7 +1,6 @@
 package com.losd.tw;
 
 import com.losd.tw.exceptions.NoSuchRouteException;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -51,8 +50,8 @@ public class ThoughtWorksTests {
 
     @Test
     public void test6() {
-        List<Route> result = graph.search(C, C, 3);
-        result.addAll(graph.search(C, C, 2));
+        List<Route> result = graph.searchByMaximumSteps(C, C, 3);
+        result.addAll(graph.searchByMaximumSteps(C, C, 2));
 
         Route expectedRoute1 = new Route(C, D, C);
         Route expectedRoute2 = new Route(C, E, B, C);
@@ -64,7 +63,7 @@ public class ThoughtWorksTests {
 
     @Test
     public void test7() {
-        List<Route> result = graph.search(A, C, 4);
+        List<Route> result = graph.searchByMaximumSteps(A, C, 4);
 
         Route expectedRoute1 = new Route(A, B, C, D, C);
         Route expectedRoute2 = new Route(A, D, C, D, C);
@@ -80,7 +79,7 @@ public class ThoughtWorksTests {
     public void test8() {
         for (int i=0; i < 10; i++) {
             System.out.println("length " + i);
-            graph.search(A, C, i);
+            graph.searchByMaximumSteps(A, C, i);
         }
     }
 
