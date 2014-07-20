@@ -9,10 +9,10 @@ import java.util.HashMap;
  */
 public class Town {
     private static HashMap<String, Town> towns = new HashMap<String, Town>();
-    private String id;
+    private String name;
 
-    private Town(String id) {
-        this.id = id;
+    private Town(String name) {
+        this.name = name;
     }
 
     public static Town getInstance(String id) {
@@ -28,6 +28,6 @@ public class Town {
     }
 
     public String toString() {
-        return id;
+        return name;
     }
 }
