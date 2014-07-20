@@ -30,4 +30,9 @@ public class Town {
     public String toString() {
         return name;
     }
+
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
+    }
 }

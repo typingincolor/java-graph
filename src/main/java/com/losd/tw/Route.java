@@ -71,4 +71,9 @@ public class Route {
 
         return true;
     }
+
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
+    }
 }
