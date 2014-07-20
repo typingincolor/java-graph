@@ -188,16 +188,6 @@ public class Graph {
             return visited.size();
         }
 
-        public String toString() {
-            StringBuilder result = new StringBuilder();
-            for (Trip town : visited) {
-                result.append(town.destination);
-            }
-
-            result.append(" ").append(distanceTravelled);
-            return result.toString();
-        }
-
         public Route toRoute() {
             Town[] towns = new Town[visited.size()];
             for (int i=0; i < visited.size(); i++)
