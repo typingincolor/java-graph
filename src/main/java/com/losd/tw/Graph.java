@@ -11,10 +11,10 @@ import java.util.*;
  * Created by andrew on 19/07/2014.
  */
 public class Graph {
-    private HashMap<Town, Set<Trip>> nodes = new HashMap<Town, Set<Trip>>();
+    private HashMap<Town, List<Trip>> nodes = new HashMap<Town, List<Trip>>();
 
     public void addTrip(Line line) {
-        Set<Trip> trips = getTripsForStartTown(line.getStartTown());
+        List<Trip> trips = getTripsForStartTown(line.getStartTown());
 
         Trip potentialTrip = new Trip(line.getEndTown(), line.getDistance());
 
@@ -34,8 +34,8 @@ public class Graph {
         return calculateTotalDistance(route, 0);
     }
 
-    private Set<Trip> getTripsForStartTown(Town town) {
-        return (nodes.get(town) == null) ? new HashSet<Trip>() : nodes.get(town);
+    private List<Trip> getTripsForStartTown(Town town) {
+        return (nodes.get(town) == null) ? new LinkedList<Trip>() : nodes.get(town);
     }
 
     private int calculateTotalDistance(Route route, int totalDistance) {
@@ -62,19 +62,29 @@ public class Graph {
     }
 
     private int distance(Town a, Town b) {
-        List<Trip> trips = new ArrayList<Trip>(nodes.get(a));
-        int tripIndex = trips.indexOf(new Trip(b, 0));
+        List<Trip> trips = getTripsForStartTown(a);
 
-        if (tripIndex == -1) {
+        Trip trip = findTripEndingAt(trips, b);
+        if (trip == null) {
             throw new NoSuchRouteException();
         }
 
-        return trips.get(tripIndex).distance;
+        return trip.distance;
+    }
+
+    private Trip findTripEndingAt(List<Trip> trips, Town town) {
+        for (Trip trip : trips) {
+            if (trip.destination.equals(town)) {
+                return trip;
+            }
+        }
+
+        return null;
     }
 
     private HashSet<Route> go(VisitedTowns visited, Town end, int maxSteps) {
         HashSet<Route> result = new HashSet<Route>();
-        Set<Trip> trips = getTripsForStartTown(visited.getLastVisited());
+        List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
         for (Trip trip : trips) {
             if (visited.size() > maxSteps) {
@@ -107,7 +117,7 @@ public class Graph {
 
     private HashSet<Route> god(VisitedTowns visited, Town end, int maxDistance) {
         HashSet<Route> result = new HashSet<Route>();
-        Set<Trip> trips = getTripsForStartTown(visited.getLastVisited());
+        List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
         for (Trip trip : trips) {
             if (visited.distanceTravelled > maxDistance) {
