@@ -63,13 +63,12 @@ public class Graph {
     }
 
     public void ride(Town start, Town end, int maxSteps) {
-        LinkedList<Town> visited = new LinkedList<Town>();
-        visited.add(start);
+        VisitedTowns visited = new VisitedTowns(start);
         go(visited, end, maxSteps);
     }
 
-    public void go(LinkedList<Town> visited, Town end, int maxSteps) {
-        List<Trip> trips = getTripsForStartTown(visited.getLast());
+    private void go(VisitedTowns visited, Town end, int maxSteps) {
+        List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
         for (Trip trip : trips) {
             if (visited.size() > maxSteps) {
@@ -77,8 +76,8 @@ public class Graph {
             }
 
             if (trip.destination.equals(end)) {
-                visited.add(trip.destination);
-                if (visited.size() == maxSteps + 1) printPath(visited);
+                visited.add(trip);
+                if (visited.size() == maxSteps + 1) System.out.println(visited);
                 visited.removeLast();
                 break;
             }
@@ -90,18 +89,10 @@ public class Graph {
                 continue;
             }
 
-            visited.addLast(trip.destination);
+            visited.add(trip);
             go(visited, end, maxSteps);
             visited.removeLast();
         }
-    }
-
-    private void printPath(LinkedList<Town> visited) {
-        for (Town town : visited) {
-            System.out.print(town);
-            System.out.print(" ");
-        }
-        System.out.println();
     }
 
     private class Trip {
@@ -119,6 +110,44 @@ public class Graph {
             Trip x = (Trip) that;
 
             return this.destination.equals(x.destination);
+        }
+    }
+
+    private class VisitedTowns {
+        private LinkedList<Trip> visited = new LinkedList<Trip>();
+        private int distanceTravelled = 0;
+
+        public VisitedTowns(Town start) {
+            visited.addLast(new Trip(start, 0));
+        }
+
+        public void add(Trip trip) {
+            visited.addLast(trip);
+            distanceTravelled += trip.distance;
+        }
+
+        public void removeLast() {
+            Trip last = visited.getLast();
+            distanceTravelled -= last.distance;
+            visited.removeLast();
+        }
+
+        public Town getLastVisited() {
+            return visited.getLast().destination;
+        }
+
+        public int size() {
+            return visited.size();
+        }
+
+        public String toString() {
+            StringBuilder result = new StringBuilder();
+            for (Trip town : visited) {
+                result.append(town.destination);
+            }
+
+            result.append(" ").append(distanceTravelled);
+            return result.toString();
         }
     }
 }

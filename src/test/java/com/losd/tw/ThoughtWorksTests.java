@@ -80,6 +80,14 @@ public class ThoughtWorksTests {
         graph.ride(A, C, 4);
     }
 
+    @Test
+    public void test8() {
+        for (int i=0; i < 10; i++) {
+            System.out.println("length " + i);
+            graph.ride(A, C, i);
+        }
+    }
+
     private int distance(Town ... towns) {
         Route testRoute = new Route(towns);
         return graph.distance(testRoute);
