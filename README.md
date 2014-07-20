@@ -1,7 +1,8 @@
 # README #
 
-Details will go here...
+## Design Notes ##
 
+## Problems With The Implementation ##
 
 ## Assumptions ##
 
