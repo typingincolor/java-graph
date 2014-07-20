@@ -16,36 +16,13 @@ import static org.hamcrest.core.Is.is;
  * Created by andrew on 19/07/2014.
  */
 public class ThoughtWorksTests {
-    static Graph graph = new Graph();
+     Graph graph = GraphBuilder.build("AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7");
 
-    static Town A = new Town("A");
-    static Town B = new Town("B");
-    static Town C = new Town("C");
-    static Town D = new Town("D");
-    static Town E = new Town("E");
-
-    @BeforeClass
-    public static void setup() {
-        Line AB = new Line(A, B, 5);
-        Line BC = new Line(B, C, 4);
-        Line CD = new Line(C, D, 8);
-        Line DC = new Line(D, C, 8);
-        Line DE = new Line(D, E, 6);
-        Line AD = new Line(A, D, 5);
-        Line CE = new Line(C, E, 2);
-        Line EB = new Line(E, B, 3);
-        Line AE = new Line(A, E, 7);
-
-        graph.addTrip(AB);
-        graph.addTrip(BC);
-        graph.addTrip(CD);
-        graph.addTrip(DC);
-        graph.addTrip(DE);
-        graph.addTrip(AD);
-        graph.addTrip(CE);
-        graph.addTrip(EB);
-        graph.addTrip(AE);
-    }
+     Town A = Town.getInstance("A");
+     Town B = Town.getInstance("B");
+     Town C = Town.getInstance("C");
+     Town D = Town.getInstance("D");
+     Town E = Town.getInstance("E");
 
     @Test
     public void test1() {

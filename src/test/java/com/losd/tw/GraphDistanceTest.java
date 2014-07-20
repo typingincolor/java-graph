@@ -14,8 +14,8 @@ import static org.hamcrest.core.Is.is;
 public class GraphDistanceTest {
     @Test
     public void simpleRoute() {
-        Town A = new Town("A");
-        Town B = new Town("B");
+        Town A = Town.getInstance("A");
+        Town B = Town.getInstance("B");
 
         Route route = new Route(A, B);
 
@@ -28,9 +28,9 @@ public class GraphDistanceTest {
 
     @Test
     public void moreComplicatedRoute() {
-        Town A = new Town("A");
-        Town B = new Town("B");
-        Town C = new Town("C");
+        Town A = Town.getInstance("A");
+        Town B = Town.getInstance("B");
+        Town C = Town.getInstance("C");
 
         Route route = new Route(A, B, C);
 

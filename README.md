@@ -6,6 +6,7 @@ Details will go here...
 ## Assumptions ##
 
 * Distances between towns are integers
+* Town names are single characters
 
 ## CI Status ##
 

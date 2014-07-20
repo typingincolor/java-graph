@@ -15,8 +15,8 @@ import static org.hamcrest.core.Is.is;
 public class RouteTest {
     @Test
     public void simpleRoute() {
-        Town A = new Town("A");
-        Town B = new Town("B");
+        Town A = Town.getInstance("A");
+        Town B = Town.getInstance("B");
 
         Route route = new Route(A, B);
 
@@ -27,7 +27,7 @@ public class RouteTest {
 
     @Test(expected = RouteTooShortExeception.class)
     public void singleTownRoute() {
-        Town A = new Town("A");
+        Town A = Town.getInstance("A");
         new Route(A);
     }
 
@@ -38,9 +38,9 @@ public class RouteTest {
 
     @Test
     public void pop() {
-        Town A = new Town("A");
-        Town B = new Town("B");
-        Town C = new Town("C");
+        Town A = Town.getInstance("A");
+        Town B = Town.getInstance("B");
+        Town C = Town.getInstance("C");
 
         Route route = new Route(A, B, C);
         Route nextRoute = route.pop();
@@ -53,8 +53,8 @@ public class RouteTest {
 
     @Test
     public void endOfRoute() {
-        Town A = new Town("A");
-        Town B = new Town("B");
+        Town A = Town.getInstance("A");
+        Town B = Town.getInstance("B");
 
         Route route = new Route(A, B);
         assertThat(route.pop(), is(nullValue()));

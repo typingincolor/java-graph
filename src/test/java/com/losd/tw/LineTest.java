@@ -11,7 +11,7 @@ import org.junit.Test;
 public class LineTest {
     @Test(expected = InvalidLineException.class)
     public void cannotCreateLineFromAtoA() {
-        Town A = new Town("A");
+        Town A = Town.getInstance("A");
         new Line(A, A, 5);
     }
 }

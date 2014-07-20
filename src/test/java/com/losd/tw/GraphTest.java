@@ -13,13 +13,13 @@ import static org.hamcrest.Matchers.*;
  * Created by andrew on 19/07/2014.
  */
 public class GraphTest {
+    Town A = Town.getInstance("A");
+    Town B = Town.getInstance("B");
+    Town C = Town.getInstance("C");
+
     @Test
     public void addRoute() {
         Graph graph = new Graph();
-
-        Town A = new Town("A");
-        Town B = new Town("B");
-
         Line line = new Line(A, B, 5);
 
         graph.addTrip(line);
@@ -31,13 +31,8 @@ public class GraphTest {
     public void addTwoRoutes() {
         Graph graph = new Graph();
 
-        Town A = new Town("A");
-        Town B = new Town("B");
-        Town C = new Town("C");
-
         Line lineAB = new Line(A, B, 5);
         Line lineAC = new Line(A, C, 1);
-
 
         graph.addTrip(lineAB);
         graph.addTrip(lineAC);
@@ -47,19 +42,7 @@ public class GraphTest {
 
     @Test
     public void triangle() {
-        Graph graph = new Graph();
-
-        Town A = new Town("A");
-        Town B = new Town("B");
-        Town C = new Town("C");
-
-        Line lineAB = new Line(A, B, 5);
-        Line lineAC = new Line(A, C, 1);
-        Line lineBC = new Line(B, C, 1);
-
-        graph.addTrip(lineAB);
-        graph.addTrip(lineAC);
-        graph.addTrip(lineBC);
+        Graph graph = triangleGraph();
 
         assertThat(graph.numberOfLinesStartingAt(A), is(2));
         assertThat(graph.numberOfLinesStartingAt(B), is(1));
@@ -68,9 +51,6 @@ public class GraphTest {
     @Test(expected = DuplicateRouteException.class)
     public void failsForDuplicateRoute() {
         Graph graph = new Graph();
-
-        Town A = new Town("A");
-        Town B = new Town("B");
 
         Line line = new Line(A, B, 5);
 
@@ -82,9 +62,22 @@ public class GraphTest {
     public void failsForRouteFromAToA() {
         Graph graph = new Graph();
 
-        Town A = new Town("A");
         Line line = new Line(A, A, 5);
 
         graph.addTrip(line);
+    }
+
+    private Graph triangleGraph() {
+        Graph graph = new Graph();
+
+        Line lineAB = new Line(A, B, 5);
+        Line lineAC = new Line(A, C, 1);
+        Line lineBC = new Line(B, C, 1);
+
+        graph.addTrip(lineAB);
+        graph.addTrip(lineAC);
+        graph.addTrip(lineBC);
+
+        return graph;
     }
 }
