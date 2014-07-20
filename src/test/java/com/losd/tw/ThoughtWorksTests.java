@@ -1,7 +1,6 @@
 package com.losd.tw;
 
 import com.losd.tw.exceptions.NoSuchRouteException;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Set;
@@ -51,8 +50,8 @@ public class ThoughtWorksTests {
 
     @Test
     public void test6() {
-        Set<Route> result = graph.searchByMaximumSteps(C, C, 3);
-        result.addAll(graph.searchByMaximumSteps(C, C, 2));
+        Set<Route> result = graph.searchByNumberOfStop(C, C, 3);
+        result.addAll(graph.searchByNumberOfStop(C, C, 2));
 
         Route expectedRoute1 = new Route(C, D, C);
         Route expectedRoute2 = new Route(C, E, B, C);
@@ -64,7 +63,7 @@ public class ThoughtWorksTests {
 
     @Test
     public void test7() {
-        Set<Route> result = graph.searchByMaximumSteps(A, C, 4);
+        Set<Route> result = graph.searchByNumberOfStop(A, C, 4);
 
         Route expectedRoute1 = new Route(A, B, C, D, C);
         Route expectedRoute2 = new Route(A, D, C, D, C);

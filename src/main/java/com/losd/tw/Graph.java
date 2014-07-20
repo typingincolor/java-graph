@@ -53,9 +53,9 @@ public class Graph {
         return calculateTotalDistance(route.pop(), totalDistance);
     }
 
-    public Set<Route> searchByMaximumSteps(Town start, Town end, int maxSteps) {
+    public Set<Route> searchByNumberOfStop(Town start, Town end, int numberOfStops) {
         VisitedTowns visited = new VisitedTowns(start);
-        return go(visited, end, maxSteps);
+        return searchRestrictedByNumberOfStops(visited, end, numberOfStops);
     }
 
     public Set<Route> searchByMaximumDistance(Town start, Town end, int maxDistance) {
@@ -136,18 +136,18 @@ public class Graph {
         return result;
     }
 
-    private HashSet<Route> go(VisitedTowns visited, Town end, int maxSteps) {
+    private HashSet<Route> searchRestrictedByNumberOfStops(VisitedTowns visited, Town end, int numberOfStops) {
         HashSet<Route> result = new HashSet<Route>();
         List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
         for (Trip trip : trips) {
-            if (visited.size() > maxSteps) {
+            if (visited.size() > numberOfStops) {
                 continue;
             }
 
             if (trip.destination.equals(end)) {
                 visited.add(trip);
-                if (visited.size() == maxSteps + 1) {
+                if (visited.size() == numberOfStops + 1) {
                     result.add(visited.toRoute());
                 }
                 visited.removeLast();
@@ -156,12 +156,12 @@ public class Graph {
         }
 
         for (Trip trip: trips) {
-            if (visited.size() > maxSteps) {
+            if (visited.size() > numberOfStops) {
                 continue;
             }
 
             visited.add(trip);
-            result.addAll(go(visited, end, maxSteps));
+            result.addAll(searchRestrictedByNumberOfStops(visited, end, numberOfStops));
             visited.removeLast();
         }
 
