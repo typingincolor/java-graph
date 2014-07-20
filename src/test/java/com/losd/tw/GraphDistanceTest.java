@@ -1,5 +1,6 @@
 package com.losd.tw;
 
+import com.losd.tw.exceptions.NoSuchRouteException;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -12,33 +13,30 @@ import static org.hamcrest.core.Is.is;
  * Created by andrew on 19/07/2014.
  */
 public class GraphDistanceTest {
+    Town A = new Town("A");
+    Town B = new Town("B");
+    Town C = new Town("C");
+
     @Test
     public void simpleRoute() {
-        Town A = new Town("A");
-        Town B = new Town("B");
-
+        Graph graph = GraphBuilder.build("AB5");
         Route route = new Route(A, B);
-
-        Graph graph = new Graph();
-        Line line = new Line(A, B, 5);
-        graph.addTrip(line);
 
         assertThat(graph.distance(route), is(5));
     }
 
     @Test
     public void moreComplicatedRoute() {
-        Town A = new Town("A");
-        Town B = new Town("B");
-        Town C = new Town("C");
-
+        Graph graph = GraphBuilder.build("AB5, BC6");
         Route route = new Route(A, B, C);
 
-        Graph graph = new Graph();
-        Line lineAB = new Line(A, B, 5);
-        Line lineBC = new Line(B, C, 6);
-        graph.addTrip(lineAB);
-        graph.addTrip(lineBC);
+        assertThat(graph.distance(route), is(11));
+    }
+
+    @Test(expected = NoSuchRouteException.class)
+    public void noRoute() {
+        Graph graph = GraphBuilder.build("AB5, BC6");
+        Route route = new Route(A, C);
 
         assertThat(graph.distance(route), is(11));
     }
