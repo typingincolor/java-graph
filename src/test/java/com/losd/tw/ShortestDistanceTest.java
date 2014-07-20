@@ -11,7 +11,7 @@ import static org.hamcrest.core.Is.is;
  *
  * Created by andrew on 20/07/2014.
  */
-public class ShortestDistanceTests extends UnitTest {
+public class ShortestDistanceTest extends UnitTest {
     @Test
     public void simple() {
         Graph graph = GraphBuilder.build("AB5, BC6, AC1");

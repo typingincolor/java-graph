@@ -60,7 +60,13 @@ public class Graph {
 
     public Set<Route> searchByMaximumDistance(Town start, Town end, int maxDistance) {
         VisitedTowns visited = new VisitedTowns(start);
-        return searchRestrictedByMaximumDistance(visited, end, maxDistance);
+        Set<Route> routes = searchRestrictedByMaximumDistance(visited, end, maxDistance);
+
+        if (routes.size() == 0) {
+            throw new NoSuchRouteException();
+        }
+
+        return routes;
     }
 
     public Route getShortestRouteBetween(Town start, Town end) {
