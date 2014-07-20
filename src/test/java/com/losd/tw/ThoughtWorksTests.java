@@ -1,10 +1,9 @@
 package com.losd.tw;
 
 import com.losd.tw.exceptions.NoSuchRouteException;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -52,7 +51,7 @@ public class ThoughtWorksTests {
 
     @Test
     public void test6() {
-        HashSet<Route> result = graph.searchByMaximumSteps(C, C, 3);
+        Set<Route> result = graph.searchByMaximumSteps(C, C, 3);
         result.addAll(graph.searchByMaximumSteps(C, C, 2));
 
         Route expectedRoute1 = new Route(C, D, C);
@@ -65,7 +64,7 @@ public class ThoughtWorksTests {
 
     @Test
     public void test7() {
-        HashSet<Route> result = graph.searchByMaximumSteps(A, C, 4);
+        Set<Route> result = graph.searchByMaximumSteps(A, C, 4);
 
         Route expectedRoute1 = new Route(A, B, C, D, C);
         Route expectedRoute2 = new Route(A, D, C, D, C);
@@ -75,6 +74,23 @@ public class ThoughtWorksTests {
         assertThat(result, hasItem(expectedRoute1));
         assertThat(result, hasItem(expectedRoute2));
         assertThat(result, hasItem(expectedRoute3));
+    }
+
+    @Test
+    public void test8() {
+        Route result = graph.searchByShortestDistance(A, C);
+
+        Route expectedRoute = new Route(A, B, C);
+        assertThat(result, is(expectedRoute));
+    }
+
+    @Ignore("not ready")
+    @Test
+    public void test9() {
+        Route result = graph.searchByShortestDistance(B, B);
+
+        Route expectedRoute = new Route(B, C, E);
+        assertThat(result, is(expectedRoute));
     }
 
     @Test
