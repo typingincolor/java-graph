@@ -1,6 +1,5 @@
 package com.losd.tw;
 
-import com.losd.tw.exceptions.NoSuchRouteException;
 import org.junit.Test;
 
 import java.util.Set;
