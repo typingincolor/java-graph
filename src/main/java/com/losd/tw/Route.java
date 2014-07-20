@@ -44,4 +44,13 @@ public class Route {
     public Town getFirstDestination() {
         return towns.get(1);
     }
+
+    public String toString() {
+        StringBuffer result = new StringBuffer();
+
+        for(Town town : towns) {
+            result.append(town);
+        }
+        return result.toString();
+    }
 }

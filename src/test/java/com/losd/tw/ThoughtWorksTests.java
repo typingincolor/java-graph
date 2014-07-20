@@ -4,6 +4,8 @@ import com.losd.tw.exceptions.NoSuchRouteException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -71,20 +73,22 @@ public class ThoughtWorksTests {
 
     @Test
     public void test6() {
-        graph.ride(C, C, 3);
-        graph.ride(C, C, 2);
+        List<Route> result = graph.search(C, C, 3);
+        result.addAll(graph.search(C, C, 2));
+        assertThat(result.size(), is(2));
     }
 
     @Test
     public void test7() {
-        graph.ride(A, C, 4);
+        List<Route> result = graph.search(A, C, 4);
+        assertThat(result.size(), is(3));
     }
 
     @Test
     public void test8() {
         for (int i=0; i < 10; i++) {
             System.out.println("length " + i);
-            graph.ride(A, C, i);
+            graph.search(A, C, i);
         }
     }
 

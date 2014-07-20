@@ -51,6 +51,11 @@ public class Graph {
         return calculateTotalDistance(route.pop(), totalDistance);
     }
 
+    public List<Route> search(Town start, Town end, int maxSteps) {
+        VisitedTowns visited = new VisitedTowns(start);
+        return go(visited, end, maxSteps);
+    }
+
     private int distance(Town a, Town b) {
         List<Trip> trips = nodes.get(a);
         int tripIndex = trips.indexOf(new Trip(b, 0));
@@ -62,12 +67,8 @@ public class Graph {
         return trips.get(tripIndex).distance;
     }
 
-    public void ride(Town start, Town end, int maxSteps) {
-        VisitedTowns visited = new VisitedTowns(start);
-        go(visited, end, maxSteps);
-    }
-
-    private void go(VisitedTowns visited, Town end, int maxSteps) {
+    private List<Route> go(VisitedTowns visited, Town end, int maxSteps) {
+        List<Route> result = new ArrayList<Route>();
         List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
         for (Trip trip : trips) {
@@ -77,7 +78,9 @@ public class Graph {
 
             if (trip.destination.equals(end)) {
                 visited.add(trip);
-                if (visited.size() == maxSteps + 1) System.out.println(visited);
+                if (visited.size() == maxSteps + 1) {
+                    result.add(visited.toRoute());
+                }
                 visited.removeLast();
                 break;
             }
@@ -90,9 +93,11 @@ public class Graph {
             }
 
             visited.add(trip);
-            go(visited, end, maxSteps);
+            result.addAll(go(visited, end, maxSteps));
             visited.removeLast();
         }
+
+        return result;
     }
 
     private class Trip {
@@ -148,6 +153,15 @@ public class Graph {
 
             result.append(" ").append(distanceTravelled);
             return result.toString();
+        }
+
+        public Route toRoute() {
+            Town[] towns = new Town[visited.size()];
+            for (int i=0; i < visited.size(); i++)
+            {
+                towns[i] = visited.get(i).destination;
+            }
+            return new Route(towns);
         }
     }
 }
