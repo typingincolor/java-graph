@@ -63,7 +63,7 @@ public class Graph {
         return searchRestrictedByMaximumDistance(visited, end, maxDistance);
     }
 
-    public Route searchByShortestRoute(Town start, Town end) {
+    public Route getShortestRouteBetween(Town start, Town end) {
         VisitedTowns visited = new VisitedTowns(start);
         shortestRoute = 30;
         Set<Route> routes = searchForShortestRoute(visited, end);
@@ -77,6 +77,10 @@ public class Graph {
                 shortest = distance;
                 result = route;
             }
+        }
+
+        if (result == null) {
+            throw new NoSuchRouteException();
         }
 
         return result;

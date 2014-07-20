@@ -77,7 +77,7 @@ public class ThoughtWorksTests {
 
     @Test
     public void test8() {
-        Route result = graph.searchByShortestRoute(A, C);
+        Route result = graph.getShortestRouteBetween(A, C);
 
         Route expectedRoute = new Route(A, B, C);
         assertThat(result, is(expectedRoute));
@@ -85,7 +85,7 @@ public class ThoughtWorksTests {
 
     @Test
     public void test9() {
-        Route result = graph.searchByShortestRoute(B, B);
+        Route result = graph.getShortestRouteBetween(B, B);
 
         Route expectedRoute = new Route(B, C, E, B);
         assertThat(result, is(expectedRoute));
