@@ -1,6 +1,6 @@
 package com.losd.tw;
 
-import com.losd.tw.exceptions.RouteTooShortExeception;
+import com.losd.tw.exceptions.RouteTooShortException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,11 +19,11 @@ public class Route {
      *
      * @param towns variable list of towns
      *
-     * @throws com.losd.tw.exceptions.RouteTooShortExeception thrown if an attempt is made to route from A to A directly.
+     * @throws com.losd.tw.exceptions.RouteTooShortException thrown if an attempt is made to route from A to A directly.
      */
     public Route(Town... towns) {
         if (towns.length < 2) {
-            throw new RouteTooShortExeception();
+            throw new RouteTooShortException();
         }
 
         this.towns = Arrays.asList(towns);

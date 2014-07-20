@@ -5,5 +5,5 @@ package com.losd.tw.exceptions;
  * <p/>
  * Created by andrew on 19/07/2014.
  */
-public class RouteTooShortExeception extends RuntimeException {
+public class RouteTooShortException extends RuntimeException {
 }

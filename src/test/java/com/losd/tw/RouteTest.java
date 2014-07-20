@@ -1,6 +1,6 @@
 package com.losd.tw;
 
-import com.losd.tw.exceptions.RouteTooShortExeception;
+import com.losd.tw.exceptions.RouteTooShortException;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -22,12 +22,12 @@ public class RouteTest extends UnitTest {
         assertThat(route.getFirstDestination(), is(B));
     }
 
-    @Test(expected = RouteTooShortExeception.class)
+    @Test(expected = RouteTooShortException.class)
     public void singleTownRoute() {
         new Route(A);
     }
 
-    @Test(expected = RouteTooShortExeception.class)
+    @Test(expected = RouteTooShortException.class)
     public void noTownRoute() {
         new Route();
     }
