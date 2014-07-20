@@ -17,7 +17,7 @@ Once this is installed the application can be run by typing
 
     mvn clean compile exec:java -Dexec.mainClass="com.losd.tw.Application" -q
     
-The file containing the graph is ./src/main/resources/graph.txt
+The file containing the graph is `./src/main/resources/graph.txt`
 
 ## CI Status ##
 
