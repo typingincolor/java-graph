@@ -30,10 +30,14 @@ public class Graph {
      *
      * @param route a route
      * @return the distance
-     * @throws com.losd.tw.exceptions.NoSuchRouteException if part of the route is not valid
      */
-    public int distance(Route route) {
-        return calculateTotalDistance(route, 0);
+    public String distance(Route route) {
+        try {
+            return Integer.toString(calculateTotalDistance(route, 0));
+        }
+        catch (NoSuchRouteException e) {
+            return "NO SUCH ROUTE";
+        }
     }
 
     /**
@@ -94,7 +98,7 @@ public class Graph {
         int shortest = Integer.MAX_VALUE;
 
         for (Route route : routes) {
-            int distance = distance(route);
+            int distance = calculateTotalDistance(route, 0);
             if (result == null || distance < shortest) {
                 shortest = distance;
                 result = route;

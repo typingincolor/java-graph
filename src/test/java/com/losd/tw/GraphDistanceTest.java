@@ -17,7 +17,7 @@ public class GraphDistanceTest extends UnitTest{
         Graph graph = GraphBuilder.build("AB5");
         Route route = new Route(A, B);
 
-        assertThat(graph.distance(route), is(5));
+        assertThat(graph.distance(route), is("5"));
     }
 
     @Test
@@ -25,14 +25,14 @@ public class GraphDistanceTest extends UnitTest{
         Graph graph = GraphBuilder.build("AB5, BC6");
         Route route = new Route(A, B, C);
 
-        assertThat(graph.distance(route), is(11));
+        assertThat(graph.distance(route), is("11"));
     }
 
-    @Test(expected = NoSuchRouteException.class)
+    @Test
     public void noRoute() {
         Graph graph = GraphBuilder.build("AB5, BC6");
         Route route = new Route(A, C);
 
-        assertThat(graph.distance(route), is(11));
+        assertThat(graph.distance(route), is("NO SUCH ROUTE"));
     }
 }

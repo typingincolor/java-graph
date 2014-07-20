@@ -19,27 +19,27 @@ public class ThoughtWorksTests extends UnitTest {
 
     @Test
     public void test1() {
-        assertThat(distance(A, B, C), is(9));
+        assertThat(distance(A, B, C), is("9"));
     }
 
     @Test
     public void test2() {
-        assertThat(distance(A, D), is(5));
+        assertThat(distance(A, D), is("5"));
     }
 
     @Test
     public void test3() {
-        assertThat(distance(A, D, C), is(13));
+        assertThat(distance(A, D, C), is("13"));
     }
 
     @Test
     public void test4() {
-        assertThat(distance(A, E, B, C, D), is(22));
+        assertThat(distance(A, E, B, C, D), is("22"));
     }
 
-    @Test(expected = NoSuchRouteException.class)
+    @Test
     public void test5() {
-        distance(A, E, D);
+        assertThat(distance(A, E, D), is("NO SUCH ROUTE"));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class ThoughtWorksTests extends UnitTest {
         assertThat(result, hasItem(expectedRoute7));
     }
 
-    private int distance(Town... towns) {
+    private String distance(Town... towns) {
         Route testRoute = new Route(towns);
         return graph.distance(testRoute);
     }
