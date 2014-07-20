@@ -1,7 +1,6 @@
 package com.losd.tw;
 
 import com.losd.tw.exceptions.NoSuchRouteException;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -12,11 +11,7 @@ import static org.hamcrest.core.Is.is;
  *
  * Created by andrew on 19/07/2014.
  */
-public class GraphDistanceTest {
-    Town A = new Town("A");
-    Town B = new Town("B");
-    Town C = new Town("C");
-
+public class GraphDistanceTest extends UnitTest{
     @Test
     public void simpleRoute() {
         Graph graph = GraphBuilder.build("AB5");

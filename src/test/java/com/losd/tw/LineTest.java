@@ -8,10 +8,9 @@ import org.junit.Test;
  *
  * Created by andrew on 19/07/2014.
  */
-public class LineTest {
+public class LineTest extends UnitTest {
     @Test(expected = InvalidLineException.class)
     public void cannotCreateLineFromAtoA() {
-        Town A = new Town("A");
         new Line(A, A, 5);
     }
 }

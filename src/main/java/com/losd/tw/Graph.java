@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * Representation of railroad map
- *
+ * <p/>
  * Created by andrew on 19/07/2014.
  */
 public class Graph {
@@ -48,7 +48,7 @@ public class Graph {
         Town start = route.getStart();
         Town destination = route.getFirstDestination();
 
-        totalDistance+=distance(start, destination);
+        totalDistance += distance(start, destination);
 
         return calculateTotalDistance(route.pop(), totalDistance);
     }
@@ -127,7 +127,7 @@ public class Graph {
             }
         }
 
-        for (Trip trip: trips) {
+        for (Trip trip : trips) {
             if (visited.distanceTravelled > shortestRoute) {
                 continue;
             }
@@ -159,7 +159,7 @@ public class Graph {
             }
         }
 
-        for (Trip trip: trips) {
+        for (Trip trip : trips) {
             if (visited.size() > numberOfStops) {
                 continue;
             }
@@ -192,7 +192,7 @@ public class Graph {
 
         }
 
-        for (Trip trip: trips) {
+        for (Trip trip : trips) {
             if (visited.distanceTravelled > maximumDistance) {
                 continue;
             }
@@ -215,7 +215,7 @@ public class Graph {
         }
 
         public boolean equals(Object that) {
-            if (! (that instanceof Trip)) return false;
+            if (!(that instanceof Trip)) return false;
 
             Trip x = (Trip) that;
 
@@ -257,8 +257,7 @@ public class Graph {
 
         public Route toRoute() {
             Town[] towns = new Town[visited.size()];
-            for (int i=0; i < visited.size(); i++)
-            {
+            for (int i = 0; i < visited.size(); i++) {
                 towns[i] = visited.get(i).destination;
             }
             return new Route(towns);

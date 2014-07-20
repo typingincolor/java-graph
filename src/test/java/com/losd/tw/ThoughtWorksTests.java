@@ -14,14 +14,8 @@ import static org.hamcrest.core.Is.is;
  * <p/>
  * Created by andrew on 19/07/2014.
  */
-public class ThoughtWorksTests {
+public class ThoughtWorksTests extends UnitTest {
     Graph graph = GraphBuilder.build("AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7");
-
-    Town A = new Town("A");
-    Town B = new Town("B");
-    Town C = new Town("C");
-    Town D = new Town("D");
-    Town E = new Town("E");
 
     @Test
     public void test1() {

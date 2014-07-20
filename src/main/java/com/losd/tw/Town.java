@@ -2,7 +2,7 @@ package com.losd.tw;
 
 /**
  * Representation of a Town
- *
+ * <p/>
  * Created by andrew on 19/07/2014.
  */
 public class Town {
@@ -18,11 +18,8 @@ public class Town {
 
     @Override
     public boolean equals(Object that) {
-        if (!(that instanceof Town)) {
-            return false;
-        }
+        return that instanceof Town && this.toString().equals(that.toString());
 
-        return this.toString().equals(that.toString());
     }
 
     @Override

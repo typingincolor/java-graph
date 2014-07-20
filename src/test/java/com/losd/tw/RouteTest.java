@@ -12,12 +12,9 @@ import static org.hamcrest.core.Is.is;
  *
  * Created by andrew on 19/07/2014.
  */
-public class RouteTest {
+public class RouteTest extends UnitTest {
     @Test
     public void simpleRoute() {
-        Town A = new Town("A");
-        Town B = new Town("B");
-
         Route route = new Route(A, B);
 
         assertThat(route.numberOfTowns(), is(2));
@@ -27,7 +24,6 @@ public class RouteTest {
 
     @Test(expected = RouteTooShortExeception.class)
     public void singleTownRoute() {
-        Town A = new Town("A");
         new Route(A);
     }
 
@@ -38,10 +34,6 @@ public class RouteTest {
 
     @Test
     public void pop() {
-        Town A = new Town("A");
-        Town B = new Town("B");
-        Town C = new Town("C");
-
         Route route = new Route(A, B, C);
         Route nextRoute = route.pop();
         assertThat(nextRoute.numberOfTowns(), is(2));
@@ -53,9 +45,6 @@ public class RouteTest {
 
     @Test
     public void endOfRoute() {
-        Town A = new Town("A");
-        Town B = new Town("B");
-
         Route route = new Route(A, B);
         assertThat(route.pop(), is(nullValue()));
     }

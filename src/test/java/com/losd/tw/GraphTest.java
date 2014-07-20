@@ -12,11 +12,7 @@ import static org.hamcrest.Matchers.*;
  *
  * Created by andrew on 19/07/2014.
  */
-public class GraphTest {
-    Town A = new Town("A");
-    Town B = new Town("B");
-    Town C = new Town("C");
-
+public class GraphTest extends UnitTest {
     @Test
     public void addRoute() {
         Graph graph = GraphBuilder.build("AB5");

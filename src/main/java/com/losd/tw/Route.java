@@ -8,13 +8,13 @@ import java.util.List;
 
 /**
  * Representation of a route
- *
+ * <p/>
  * Created by andrew on 19/07/2014.
  */
 public class Route {
     private List<Town> towns = new ArrayList<Town>();
 
-    public Route(Town ... towns) {
+    public Route(Town... towns) {
         if (towns.length < 2) {
             throw new RouteTooShortExeception();
         }
@@ -46,9 +46,9 @@ public class Route {
     }
 
     public String toString() {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
-        for(Town town : towns) {
+        for (Town town : towns) {
             result.append(town);
         }
         return result.toString();
@@ -63,7 +63,7 @@ public class Route {
             return false;
         }
 
-        for (int i=0; i < towns.size(); i++) {
+        for (int i = 0; i < towns.size(); i++) {
             if (!towns.get(i).equals(((Route) that).towns.get(i))) {
                 return false;
             }
