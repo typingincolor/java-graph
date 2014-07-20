@@ -50,8 +50,8 @@ public class ThoughtWorksTests {
 
     @Test
     public void test6() {
-        Set<Route> result = graph.searchByNumberOfStop(C, C, 3);
-        result.addAll(graph.searchByNumberOfStop(C, C, 2));
+        Set<Route> result = graph.searchByNumberOfStops(C, C, 3);
+        result.addAll(graph.searchByNumberOfStops(C, C, 2));
 
         Route expectedRoute1 = new Route(C, D, C);
         Route expectedRoute2 = new Route(C, E, B, C);
@@ -63,7 +63,7 @@ public class ThoughtWorksTests {
 
     @Test
     public void test7() {
-        Set<Route> result = graph.searchByNumberOfStop(A, C, 4);
+        Set<Route> result = graph.searchByNumberOfStops(A, C, 4);
 
         Route expectedRoute1 = new Route(A, B, C, D, C);
         Route expectedRoute2 = new Route(A, D, C, D, C);
@@ -77,7 +77,7 @@ public class ThoughtWorksTests {
 
     @Test
     public void test8() {
-        Route result = graph.searchByShortestDistance(A, C);
+        Route result = graph.searchByShortestRoute(A, C);
 
         Route expectedRoute = new Route(A, B, C);
         assertThat(result, is(expectedRoute));
@@ -85,7 +85,7 @@ public class ThoughtWorksTests {
 
     @Test
     public void test9() {
-        Route result = graph.searchByShortestDistance(B, B);
+        Route result = graph.searchByShortestRoute(B, B);
 
         Route expectedRoute = new Route(B, C, E, B);
         assertThat(result, is(expectedRoute));

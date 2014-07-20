@@ -53,20 +53,20 @@ public class Graph {
         return calculateTotalDistance(route.pop(), totalDistance);
     }
 
-    public Set<Route> searchByNumberOfStop(Town start, Town end, int numberOfStops) {
+    public Set<Route> searchByNumberOfStops(Town start, Town end, int numberOfStops) {
         VisitedTowns visited = new VisitedTowns(start);
         return searchRestrictedByNumberOfStops(visited, end, numberOfStops);
     }
 
     public Set<Route> searchByMaximumDistance(Town start, Town end, int maxDistance) {
         VisitedTowns visited = new VisitedTowns(start);
-        return god(visited, end, maxDistance);
+        return searchRestrictedByMaximumDistance(visited, end, maxDistance);
     }
 
-    public Route searchByShortestDistance(Town start, Town end) {
+    public Route searchByShortestRoute(Town start, Town end) {
         VisitedTowns visited = new VisitedTowns(start);
         shortestRoute = 30;
-        Set<Route> routes = goshortest(visited, end);
+        Set<Route> routes = searchForShortestRoute(visited, end);
 
         Route result = null;
         int shortest = Integer.MAX_VALUE;
@@ -103,7 +103,7 @@ public class Graph {
         return null;
     }
 
-    private Set<Route> goshortest(VisitedTowns visited, Town end) {
+    private Set<Route> searchForShortestRoute(VisitedTowns visited, Town end) {
         HashSet<Route> result = new HashSet<Route>();
         List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
@@ -129,7 +129,7 @@ public class Graph {
             }
 
             visited.add(trip);
-            result.addAll(goshortest(visited, end));
+            result.addAll(searchForShortestRoute(visited, end));
             visited.removeLast();
         }
 
@@ -168,18 +168,18 @@ public class Graph {
         return result;
     }
 
-    private HashSet<Route> god(VisitedTowns visited, Town end, int maxDistance) {
+    private HashSet<Route> searchRestrictedByMaximumDistance(VisitedTowns visited, Town end, int maximumDistance) {
         HashSet<Route> result = new HashSet<Route>();
         List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
         for (Trip trip : trips) {
-            if (visited.distanceTravelled > maxDistance) {
+            if (visited.distanceTravelled > maximumDistance) {
                 continue;
             }
 
             if (trip.destination.equals(end)) {
                 visited.add(trip);
-                if (visited.distanceTravelled <= maxDistance) {
+                if (visited.distanceTravelled <= maximumDistance) {
                     result.add(visited.toRoute());
                 }
                 visited.removeLast();
@@ -189,12 +189,12 @@ public class Graph {
         }
 
         for (Trip trip: trips) {
-            if (visited.distanceTravelled > maxDistance) {
+            if (visited.distanceTravelled > maximumDistance) {
                 continue;
             }
 
             visited.add(trip);
-            result.addAll(god(visited, end, maxDistance));
+            result.addAll(searchRestrictedByMaximumDistance(visited, end, maximumDistance));
             visited.removeLast();
         }
 
