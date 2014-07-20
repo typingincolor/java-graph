@@ -143,6 +143,10 @@ public class Graph {
         return (nodes.get(town) == null) ? new LinkedList<Trip>() : nodes.get(town);
     }
 
+    /*
+     Recursively calculate the total distance of a route. Pass in the route and the starting distance.
+     If you are starting at the beginning use 0.
+     */
     private int calculateTotalDistance(Route route, int totalDistance) {
         if (route == null) {
             return totalDistance;
