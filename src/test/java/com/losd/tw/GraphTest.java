@@ -19,65 +19,32 @@ public class GraphTest {
 
     @Test
     public void addRoute() {
-        Graph graph = new Graph();
-        Line line = new Line(A, B, 5);
-
-        graph.addTrip(line);
-
-        assertThat(graph.numberOfLinesStartingAt(A), is(1));
+        Graph graph = GraphBuilder.build("AB5");
+        assertThat(graph.numberOfTripsStartingAt(A), is(1));
     }
 
     @Test
     public void addTwoRoutes() {
-        Graph graph = new Graph();
-
-        Line lineAB = new Line(A, B, 5);
-        Line lineAC = new Line(A, C, 1);
-
-        graph.addTrip(lineAB);
-        graph.addTrip(lineAC);
-
-        assertThat(graph.numberOfLinesStartingAt(A), is(2));
+        Graph graph = GraphBuilder.build("AB5, AC1");
+        assertThat(graph.numberOfTripsStartingAt(A), is(2));
     }
 
     @Test
     public void triangle() {
-        Graph graph = triangleGraph();
+        Graph graph = GraphBuilder.build("AB5, AC1, BC1");
 
-        assertThat(graph.numberOfLinesStartingAt(A), is(2));
-        assertThat(graph.numberOfLinesStartingAt(B), is(1));
+        assertThat(graph.numberOfTripsStartingAt(A), is(2));
+        assertThat(graph.numberOfTripsStartingAt(B), is(1));
+        assertThat(graph.numberOfTripsStartingAt(C), is(0));
     }
 
     @Test(expected = DuplicateRouteException.class)
     public void failsForDuplicateRoute() {
-        Graph graph = new Graph();
-
-        Line line = new Line(A, B, 5);
-
-        graph.addTrip(line);
-        graph.addTrip(line);
+        GraphBuilder.build("AB5, AB5");
     }
 
     @Test(expected = InvalidLineException.class)
     public void failsForRouteFromAToA() {
-        Graph graph = new Graph();
-
-        Line line = new Line(A, A, 5);
-
-        graph.addTrip(line);
-    }
-
-    private Graph triangleGraph() {
-        Graph graph = new Graph();
-
-        Line lineAB = new Line(A, B, 5);
-        Line lineAC = new Line(A, C, 1);
-        Line lineBC = new Line(B, C, 1);
-
-        graph.addTrip(lineAB);
-        graph.addTrip(lineAC);
-        graph.addTrip(lineBC);
-
-        return graph;
+        GraphBuilder.build("AA5");
     }
 }

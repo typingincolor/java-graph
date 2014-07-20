@@ -27,8 +27,9 @@ public class Graph {
         nodes.put(line.getStartTown(), trips);
     }
 
-    public int numberOfLinesStartingAt(Town town) {
-        return nodes.get(town).size();
+    public int numberOfTripsStartingAt(Town town) {
+        List<Trip> trips = nodes.get(town);
+        return trips == null ? 0 : trips.size();
     }
 
     public int distance(Route route) {
