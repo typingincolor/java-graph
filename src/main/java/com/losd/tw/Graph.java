@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class Graph {
     private HashMap<Town, List<Trip>> nodes = new HashMap<Town, List<Trip>>();
+    private int shortestRoute = Integer.MAX_VALUE;
 
     public void addTrip(Line line) {
         List<Trip> trips = getTripsForStartTown(line.getStartTown());
@@ -63,6 +64,7 @@ public class Graph {
 
     public Route searchByShortestDistance(Town start, Town end) {
         VisitedTowns visited = new VisitedTowns(start);
+        shortestRoute = 30;
         Set<Route> routes = goshortest(visited, end);
 
         Route result = null;
@@ -105,17 +107,23 @@ public class Graph {
         List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
 
         for (Trip trip : trips) {
+            if (visited.distanceTravelled > shortestRoute) {
+                continue;
+            }
+
             if (trip.destination.equals(end)) {
                 visited.add(trip);
-                result.add(visited.toRoute());
-                visited.shortestRoute = visited.distanceTravelled;
+                if (visited.distanceTravelled <= shortestRoute) {
+                    result.add(visited.toRoute());
+                    shortestRoute = visited.distanceTravelled;
+                }
                 visited.removeLast();
                 break;
             }
         }
 
         for (Trip trip: trips) {
-            if (trip.destination.equals(end)) {
+            if (visited.distanceTravelled > shortestRoute) {
                 continue;
             }
 
@@ -218,7 +226,15 @@ public class Graph {
     private class VisitedTowns {
         private LinkedList<Trip> visited = new LinkedList<Trip>();
         private int distanceTravelled = 0;
-        private int shortestRoute = Integer.MAX_VALUE;
+
+        public boolean contains(Town t) {
+            for (Trip trip : visited) {
+                if (trip.destination.equals(t)) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public VisitedTowns(Town start) {
             visited.addLast(new Trip(start, 0));

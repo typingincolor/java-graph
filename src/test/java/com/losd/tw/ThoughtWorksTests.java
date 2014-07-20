@@ -84,12 +84,11 @@ public class ThoughtWorksTests {
         assertThat(result, is(expectedRoute));
     }
 
-    @Ignore("not ready")
     @Test
     public void test9() {
         Route result = graph.searchByShortestDistance(B, B);
 
-        Route expectedRoute = new Route(B, C, E);
+        Route expectedRoute = new Route(B, C, E, B);
         assertThat(result, is(expectedRoute));
     }
 
