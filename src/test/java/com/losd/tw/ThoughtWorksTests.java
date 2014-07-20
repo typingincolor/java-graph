@@ -11,17 +11,17 @@ import static org.hamcrest.core.Is.is;
 
 /**
  * The all important ThoughtWorks test
- *
+ * <p/>
  * Created by andrew on 19/07/2014.
  */
 public class ThoughtWorksTests {
-     Graph graph = GraphBuilder.build("AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7");
+    Graph graph = GraphBuilder.build("AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7");
 
-     Town A = Town.getInstance("A");
-     Town B = Town.getInstance("B");
-     Town C = Town.getInstance("C");
-     Town D = Town.getInstance("D");
-     Town E = Town.getInstance("E");
+    Town A = Town.getInstance("A");
+    Town B = Town.getInstance("B");
+    Town C = Town.getInstance("C");
+    Town D = Town.getInstance("D");
+    Town E = Town.getInstance("E");
 
     @Test
     public void test1() {
@@ -76,14 +76,32 @@ public class ThoughtWorksTests {
     }
 
     @Test
-    public void test8() {
-        for (int i=0; i < 10; i++) {
-            System.out.println("length " + i);
-            graph.searchByMaximumSteps(A, C, i);
+    public void test10() {
+        List<Route> result = graph.searchByMaximumDistance(C, C, 30);
+
+        Route expectedRoute1 = new Route(C, D, C);
+        Route expectedRoute2 = new Route(C, E, B, C);
+        Route expectedRoute3 = new Route(C, E, B, C, D, C);
+        Route expectedRoute4 = new Route(C, D, C, E, B, C);
+        Route expectedRoute5 = new Route(C, D, E, B, C);
+        Route expectedRoute6 = new Route(C, E, B, C, E, B, C);
+        Route expectedRoute7 = new Route(C, E, B, C, E, B, C, E, B, C);
+
+        for (Route route : result) {
+            System.out.println(String.format("%s %d", route, graph.distance(route)));
         }
+
+        assertThat(result.size(), is(7));
+        assertThat(result, hasItem(expectedRoute1));
+        assertThat(result, hasItem(expectedRoute2));
+        assertThat(result, hasItem(expectedRoute3));
+        assertThat(result, hasItem(expectedRoute4));
+        assertThat(result, hasItem(expectedRoute5));
+        assertThat(result, hasItem(expectedRoute6));
+        assertThat(result, hasItem(expectedRoute7));
     }
 
-    private int distance(Town ... towns) {
+    private int distance(Town... towns) {
         Route testRoute = new Route(towns);
         return graph.distance(testRoute);
     }

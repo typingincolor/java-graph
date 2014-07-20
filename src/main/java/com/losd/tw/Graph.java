@@ -56,6 +56,11 @@ public class Graph {
         return go(visited, end, maxSteps);
     }
 
+    public List<Route> searchByMaximumDistance(Town start, Town end, int maxDistance) {
+        VisitedTowns visited = new VisitedTowns(start);
+        return god(visited, end, maxDistance);
+    }
+
     private int distance(Town a, Town b) {
         List<Trip> trips = nodes.get(a);
         int tripIndex = trips.indexOf(new Trip(b, 0));
@@ -94,6 +99,39 @@ public class Graph {
 
             visited.add(trip);
             result.addAll(go(visited, end, maxSteps));
+            visited.removeLast();
+        }
+
+        return result;
+    }
+
+    private List<Route> god(VisitedTowns visited, Town end, int maxDistance) {
+        List<Route> result = new ArrayList<Route>();
+        List<Trip> trips = getTripsForStartTown(visited.getLastVisited());
+
+        for (Trip trip : trips) {
+            if (visited.distanceTravelled > maxDistance) {
+                continue;
+            }
+
+            if (trip.destination.equals(end)) {
+                visited.add(trip);
+                if (visited.distanceTravelled <= maxDistance) {
+                    result.add(visited.toRoute());
+                }
+                visited.removeLast();
+                break;
+            }
+
+        }
+
+        for (Trip trip: trips) {
+            if (visited.distanceTravelled > maxDistance) {
+                continue;
+            }
+
+            visited.add(trip);
+            result.addAll(god(visited, end, maxDistance));
             visited.removeLast();
         }
 
