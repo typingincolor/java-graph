@@ -14,6 +14,8 @@ public class Graph {
     private HashMap<Town, List<Trip>> nodes = new HashMap<Town, List<Trip>>();
     private int shortestRoute = Integer.MAX_VALUE;
 
+    private static String NO_ROUTE_ERROR = "NO SUCH ROUTE";
+
     /**
      * Returns the number of possible trips starting at a tow
      *
@@ -36,7 +38,7 @@ public class Graph {
             return Integer.toString(calculateTotalDistance(route, 0));
         }
         catch (NoSuchRouteException e) {
-            return "NO SUCH ROUTE";
+            return NO_ROUTE_ERROR;
         }
     }
 
@@ -277,6 +279,20 @@ public class Graph {
         }
 
         return result;
+    }
+
+    public String duration(Route route) {
+        int numberOfIntermediateStops = route.getTowns().size()-2;
+        int durationOfStop = 2;
+        Integer totalDurationInt = null;
+
+        try {
+            totalDurationInt = new Integer(distance(route)) + numberOfIntermediateStops * durationOfStop;
+        } catch (NumberFormatException e) {
+            return NO_ROUTE_ERROR;
+
+        }
+        return totalDurationInt.toString();
     }
 
     private class Trip {
