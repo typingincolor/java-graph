@@ -21,7 +21,7 @@ The search algorithms used to find the shortest route, the routes with a specifi
 the routes with a maximum distance are all variation of a "breadth first search". Each search has a different 
 constraint to ensure that the search terminates.
 
-For simplicities sake, the Application to print off the results requested is invoked using Maven which was used
+For the sake of simplicity, the Application to print off the results requested is invoked using Maven which was used
 to build the application.
 
 ## Problems With The Implementation ##
