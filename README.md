@@ -36,15 +36,6 @@ There are a number of outstanding issues with the implementation that need to be
   it was sufficiently large for the network in question, but would not take too long for the algorithm to terminate.
   It should not be necessary to have this value. The second problem is that I have used a global variable in the implementation
   to keep track of the current shortest route. This is not best practice and should be refactored out.
-  
-* The Town class is used to model a stop on the network. As it only has a name it isn't really necessary: towns could
-  be modelled as Strings.
- 
-* I have used Exceptions when no route exists in the search algorithms. It may be better to have made the searches
-  return null values if no result could be found.
-  
-* Once I have found a route from the searches, I have to walk it to get the distance. It would have been better to 
-  store the distance as part of the Route.
 
 ## Assumptions ##
 
